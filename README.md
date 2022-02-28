@@ -148,28 +148,28 @@ Table definitions :
 
 ## Wireframe
 
-![Home page](./wireframe_home.drawio.png)
+![Home page](./wireframe/wireframe_home.drawio.png)
 Home Page
 
-![Login page](./wireframe_login.drawio.png)
+![Login page](./wireframe/wireframe_login.drawio.png)
 Login page
 
-![Registration page](./wireframe_register.drawio.png)
+![Registration page](./wireframe/wireframe_register.drawio.png)
 Registration Page
 
-![Stock search](./wireframe_search.drawio.png)
+![Stock search](./wireframe/wireframe_search.drawio.png)
 Search results
 
-![portfolio](./wireframe_portfolio.drawio.png)
+![portfolio](./wireframe/wireframe_portfolio.drawio.png)
 Portfolio page
 
-![Watchlist page](./wireframe_watchlist.drawio.png)
+![Watchlist page](./wireframe/wireframe_watchlist.drawio.png)
 Watchhlist
 
-![company profile page](./wireframe_companyprofile.drawio.png)
+![company profile page](./wireframe/wireframe_companyprofile.drawio.png)
 Company Profile
 
-![Dashboard](./wireframe_dashboard.drawio.png)
+![Dashboard](./wireframe/wireframe_dashboard.drawio.png)
 User's dashboard
 
 ## User Stories
