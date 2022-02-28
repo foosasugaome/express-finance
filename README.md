@@ -78,6 +78,22 @@ Table definitions :
 | symbol | varchar(10) |  stock symbol |
 | dateadded |  date | date stock added to watchlist |
 
+## RESTful Routing Chart
+| Method   | Path   | Description   |
+|---|---|---|
+| GET | / | Home page |
+| GET | /register | Registers a new account |
+| POST | / | Login | User logs in and get redirected to dashboard |
+| POST | /login | Login page |
+| POST | /lookup | Search stocks |
+| GET | /results/:id | Displays results | 
+| POST | /portofolio/add/:id | add stock to portfolio |
+| POST | /watchlist/add/:id | add stock to watchlist |
+| DELETE | /portofolio/remove/:id | remove stock from portfolio |
+| DELETE | /watchlist/remove/:id | remove stock from watchlist |
+| GET | /logout | logout |
+
+
 ## Application structure
 
 #### Home page
@@ -129,32 +145,37 @@ Table definitions :
 * Menu might inlcude links to the Home page, News page, Portfolio page, Dashboard, Login/Register, and Logout.
 * Localized current date and time
 
-
 ## Wireframe
 
 ![Home page](./wireframe_home.drawio.png)
-> Home Page
+Home Page
 
 ![Login page](./wireframe_login.drawio.png)
-> Login page
+Login page
 
 ![Registration page](./wireframe_register.drawio.png)
-> Registration Page 
+Registration Page
 
 ![Stock search](./wireframe_search.drawio.png)
-> Search results
+Search results
 
 ![portfolio](./wireframe_portfolio.drawio.png)
-> Portfolio page
+Portfolio page
 
 ![Watchlist page](./wireframe_watchlist.drawio.png)
-> Watchhlist
+Watchhlist
 
 ![company profile page](./wireframe_companyprofile.drawio.png)
-> Company Profile
+Company Profile
 
 ![Dashboard](./wireframe_dashboard.drawio.png)
-> User's dashboard
+User's dashboard
+
+## User Stories
+* As a user, I would like to be able to log in.
+* As a user, I would like to be able to add stocks I currently own in a portfolio to be tracked.
+* As a user, I woule like to be able to add stocks I am interested in a watchlist.
+
 
 ## MVP
 1. Creation of registration and login page. All data will be store in PostgresSql.
