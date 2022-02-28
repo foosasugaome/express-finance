@@ -25,7 +25,7 @@ Run `npm install` to install all dependencies
 A free API key must be obtained from finnhub.io. This API key will be stored in the .env file. 
 
 ## ERD
-![an imbedded draw.io png ERD](./express_finance.drawio.png)
+![an imbedded draw.io png ERD](./wireframe/express_finance.drawio.png)
 
 Table definitions :
 ##### user
