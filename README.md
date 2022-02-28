@@ -83,15 +83,15 @@ Table definitions :
 |---|---|---|
 | GET | / | Home page |
 | GET | /register | Registers a new account |
-| POST | / | Login | User logs in and get redirected to dashboard |
 | POST | /login | Login page |
-| POST | /lookup | Search stocks |
+| GET | /lookup | Search stocks |
 | GET | /results/:id | Displays results | 
-| POST | /portofolio/add/:id | add stock to portfolio |
-| POST | /watchlist/add/:id | add stock to watchlist |
+| POST | /portfolio | create a new portofolio |
+| POST | /portofolio/:id/usertransactions | add stock to portfolio |
+| POST | /watchlist/:id | add stock to watchlist |
 | GET | /company/id | display company profile |
-| DELETE | /portofolio/remove/:id | remove stock from portfolio |
-| DELETE | /watchlist/remove/:id | remove stock from watchlist |
+| DELETE | /portofolio/:id | remove stock from portfolio |
+| DELETE | /watchlist/:id | remove stock from watchlist |
 | GET | /logout | logout |
 
 
