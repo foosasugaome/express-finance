@@ -89,6 +89,7 @@ Table definitions :
 | GET | /results/:id | Displays results | 
 | POST | /portofolio/add/:id | add stock to portfolio |
 | POST | /watchlist/add/:id | add stock to watchlist |
+| GET | /company/id | display company profile |
 | DELETE | /portofolio/remove/:id | remove stock from portfolio |
 | DELETE | /watchlist/remove/:id | remove stock from watchlist |
 | GET | /logout | logout |
