@@ -11,7 +11,8 @@
     "finnhub": "^1.2.11",
     "morgan": "^1.10.0",
     "pg": "^8.7.3",
-    "sequelize": "^6.17.0"
+    "sequelize": "^6.17.0",
+    "ws": "^8.5.0"
   },
   "name": "express-finance",
   "description": "This is my 2nd project for SEI bootcamp at General Assembly",

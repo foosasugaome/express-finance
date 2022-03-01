@@ -1,1 +1,3 @@
 sequelize model:create --name user --attributes username:string,firstname:string,lastname:string,email:string,password:string,status:string
+
+sequelize model:create --name portfolio --attributes userId:integer,portfolioname:string,dateadded:date

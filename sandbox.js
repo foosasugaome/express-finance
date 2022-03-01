@@ -200,9 +200,9 @@ const finnhubClient = new finnhub.DefaultApi()
 //     console.log(data)
 // })
 
-finnhubClient.quote("AAPL", (error, data, response) => {
-    console.log(response)
-})
+// finnhubClient.quote("AAPL", (error, data, response) => {
+//     console.log(response)
+// })
 
 
 
@@ -356,3 +356,23 @@ finnhubClient.quote("AAPL", (error, data, response) => {
 // finnhubClient.stockVisaApplication('AAPL', '2021-01-01', '2021-12-31', (error, data, response) => {
 //     console.log(data);
 // });
+
+// const WebSocket = require('ws')
+// const socket = new WebSocket(`wss://ws.finnhub.io?token=${process.env.API_TOKEN}`);
+
+// // Connection opened -> Subscribe
+// socket.addEventListener('open', function (event) {
+//     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'MSFT'}))
+//     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'BINANCE:BTCUSDT'}))
+//     socket.send(JSON.stringify({'type':'subscribe', 'symbol': 'IC MARKETS:1'}))
+// });
+
+// // Listen for messages
+// socket.addEventListener('message', function (event) {
+//     console.log('Message from server ', event.data);
+// });
+
+// // Unsubscribe
+//  var unsubscribe = function(symbol) {
+//     socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
+// }

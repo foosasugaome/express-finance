@@ -1,6 +1,7 @@
 <div class="container-full">
   <legend>News</legend>
   <p class="text-warning"><%=message%></p>
+  <%if(news.length>0){%>
   <% news.forEach(element => { %>
   <div class="container-news">
     <img src="<%=element.image%>" class="news-thumbnail" />
@@ -24,3 +25,4 @@
 
   <% }) %>
 </div>
+<%}%>

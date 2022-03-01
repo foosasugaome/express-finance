@@ -32,7 +32,9 @@ app.use(async (req, res, next)=>{
 
 app.use('/register', require('./controllers/register'))
 app.use('/login', require('./controllers/login'))
+app.use('/portfolio', require('./controllers/portfolio'))
 app.use('/news', require('./controllers/news'))
+app.use('/lookup', require('./controllers/lookup'))
 
 app.get('/', (req,res)=>{
     res.render('index.ejs')
