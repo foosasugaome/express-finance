@@ -1,0 +1,35 @@
+<div class="container-forms">
+    <form action="/login" method="POST">
+      <legend>Login</legend>
+      <p class="text-warning"><%=message%></p>
+      <div class="form-group">
+        <label for="inputUsername" class="form-label mt-4">User name</label>
+        <input        
+          type="text"
+          maxlength="25"
+          class="form-control"
+          id="inputUsername"
+          aria-describedby="emailHelp"
+          placeholder="User name"
+          name="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="form-label mt-4">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword"
+          placeholder="Password"
+          name="password"
+        />
+      </div>
+          <div class="form-group" id="errHolder">
+          &nbsp;
+        </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+  

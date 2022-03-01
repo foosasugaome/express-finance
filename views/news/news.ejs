@@ -1,0 +1,26 @@
+<div class="container-full">
+  <legend>News</legend>
+  <p class="text-warning"><%=message%></p>
+  <% news.forEach(element => { %>
+  <div class="container-news">
+    <img src="<%=element.image%>" class="news-thumbnail" />
+
+    <div class="news-text">
+      <p class="badge bg-success"><%=element.category.toUpperCase()%></p>
+      <a href="<%=element.url%>" target="_blank">
+        <h5><%=element.headline%></h5></a>
+      <p><%=element.summary%></p>
+
+      <% let unix_timestamp = element.datetime %> 
+      <%let dateObj = new Date(unix_timestamp * 1000);%>
+      <%let formattedDateTime = dateObj.toLocaleString();%>
+      <p class="blockquote-footer">
+        <small>Published : <%=formattedDateTime%> Source : <%=element.source%> <%if(element.related.length >0) {%>Tags : <%=element.related%> <%}%></small>
+      </p>
+
+      <p></p>
+    </div>
+  </div>
+
+  <% }) %>
+</div>
