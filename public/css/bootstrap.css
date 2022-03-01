@@ -11919,10 +11919,11 @@ fieldset:disabled .btn {
 }
 .news-thumbnail {
   margin: 20px 30px 0 0;
-  width: 200px;
+  width: 250px;
   object-fit: contain;
   align-self: flex-start;
 }
 .news-text {
   flex: 1 1 auto;
+  align-self: center;
 }
