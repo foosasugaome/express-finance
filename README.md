@@ -188,6 +188,37 @@ User's dashboard
 1. Show real-time stock prices in company profile page.
 2. Add a crypto portfolio.
 
+## Progress
+1. User can now register and login. User can logout and clear session.
+2. User can create portfolios
+3. User can search stocks and add to portfolio
+4. News are published when clicking thet NEWS link in the navigation
+
+## Changes
+1. Renamed table/model `portfoliocontent` to `portfoliodetails`
+2. Renamed column `portfoliocontentId` to `portfoliodetailsId` in `usertransactions` table/model.
+3. Renamed column `stockcount` to `quantity` in `usertransactions` table/model.
+
+## RESTful routes changes/additions
+
+| Method   | Path   | Description   |
+|---|---|---|
+| POST | /portfolio/add | Adds a portofolio |
+| GET | /portfolio/details/:id | Renders details.ejs. This is to list stocks in selected portfolio |
+| GET | /portfolio/to?symbol | Renders addstock.ejs. Displays form for adding stock to a portfolio |
+| POST | /portfolio/add_stock/?symbol | Adds stocks to portfolio |
+| GET | /news | Renders news.ejs. Displays finance news |
+
+## TO DO
+1. Create watchlist table/model.
+2. List stocks of a selected portfolio.
+3. List stock of watchlist.
+4. Display portfolio performance. 
+5. Create company profile page. Shows news, stock quotes.
+
+
+
+
 
 
 

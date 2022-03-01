@@ -2,13 +2,19 @@
   <legend>Portfolio</legend>
   <p class="text-warning"><%=message%></p>
   <div>
- 
-<% portfolio.forEach(e => { %>
-  <a href="/portfolio/details/<%=e.id%>"><%= e.portfolioname %> </a><br> 
-<% }) %>
+    <%if(portfolio) {%>
+    <ul class="list-group">
+      <% portfolio.forEach(e => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="/portfolio/details/<%=e.id%>"><%= e.portfolioname %> </a>
+        <a href="#"><span class="badge bg-primary rounded-pill">Delete</span></a>
+      </li>
+      <%})%>      
+    </ul>
+    <%}%>
+    <div>
+      <br>
+      <a href="/portfolio/add">➕ Portfolio</a>
   </div>
-  <a href="/portfolio/add">➕ Portfolio</a>
-
-
 
 </div>

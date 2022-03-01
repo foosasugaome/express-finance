@@ -12,3 +12,7 @@ sequelize model:create --name portfoliodetails --attributes portfolioId:integer,
 
 # portfolio_portfoliodetails
 sequelize model:create --name portfolio_portfoliodetails --attributes portfolioId:integer,portfoliodetailsId:integer
+
+# usertransactions
+sequelize model:create --name usertransaction --attributes userId:integer,portfoliodetailsId:integer,transdate:date,symbol:string,transtype:string,quantity:integer,price:integer
+

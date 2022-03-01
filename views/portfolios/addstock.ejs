@@ -1,0 +1,43 @@
+<div class="container-full">
+  <legend>Portfolio</legend>
+  <p class="text-warning"><%=message%></p>
+  <div>
+    <h5>Add Stock</h5>
+    <% if(portfolio) { %> 
+    <form action="/portfolio/add_stock/?symbol=<%=symbol%>" method="POST">
+    <div class="form-group">
+      <label for="exampleSelect1" class="form-label mt-4">Portfolio </label>
+      <select class="form-select" id="exampleSelect1"  name="portfolioid">
+        <% portfolio.forEach(e => { %>
+        <option value="<%=e.id%>"><%= e.portfolioname %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label mt-4" for="inputDefault">Quantity </label>
+      <input type="number" class="form-control" placeholder="Quantity" id="inputDefault" name="quantity" value="0" required>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label mt-4" for="inputDefault">Price</label>
+      <input type="number" class="form-control" placeholder="Price" id="inputDefault" name="price" value="0" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleSelect1" class="form-label mt-4">Transaction Type </label>
+      <select class="form-select" id="exampleSelect1" name="transtype">
+        <option value="Buy">Buy</option>
+        <option value="Sell">Sell</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <br>
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Save</button>
+    </div>
+    </form>
+  <% } %> 
+
+  </div>
+  
+
+
+
+</div>
