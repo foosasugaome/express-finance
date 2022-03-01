@@ -13,13 +13,13 @@ app.use(ejsLayouts)
 app.use(cookieParser()) 
 app.use(express.urlencoded({extended: false})) 
 app.use(express.static('public'))
-
+app.use(require('morgan')('dev'));
 
 // CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next)=>{
     if(req.cookies.userId){
         // decrypting the incoming user id from the cookie
-        const decryptedId = cryptoJS.AES.decrypt(req.cookies.userId, process.env.SECRET)
+        const decryptedId = cryptoJS.AES.decrypt(req.cookies.userId, process.env.SECRET_KEY)
         // converting the decrypted id into a readable string
         const decryptedIdString = decryptedId.toString(cryptoJS.enc.Utf8)
         // querying the db for the user with that id

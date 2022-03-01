@@ -1,3 +1,14 @@
+# user table
 sequelize model:create --name user --attributes username:string,firstname:string,lastname:string,email:string,password:string,status:string
 
+# portfolio table
 sequelize model:create --name portfolio --attributes userId:integer,portfolioname:string,dateadded:date
+
+# join user - portfolio
+sequelize model:create --name user_portfolio --attributes userId:integer,portfolioId:integer
+
+# portfoliodetails table
+sequelize model:create --name portfoliodetails --attributes portfolioId:integer,stockname:string,symbol:string,stockcount:integer,dateadded:date
+
+# portfolio_portfoliodetails
+sequelize model:create --name portfolio_portfoliodetails --attributes portfolioId:integer,portfoliodetailsId:integer

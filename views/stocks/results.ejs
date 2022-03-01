@@ -14,7 +14,7 @@
         <tbody>      
         <% for(i=0;i<result.bestMatches.length;i++) {%>
             <tr>
-                <td><a href="#">➕ Portfolio</a> | <a href="#">➕ Watchlist</a></td>                
+                <td><a href="/portfolio/to?symbol=<%=result.bestMatches[i]["1. symbol"]%>">➕ Portfolio</a> | <a href="#">➕ Watchlist</a></td>                
                 <th scope="row"><%=result.bestMatches[i]["1. symbol"]%></th>
                 <td><%=result.bestMatches[i]["2. name"]%></td>
                 <td><%=result.bestMatches[i]["3. type"]%></td>

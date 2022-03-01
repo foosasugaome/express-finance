@@ -32,14 +32,15 @@ router.post('/', async(req, res)=> {
             //encrypt id (AES)
             const encryptedUserId = cryptojs.AES.encrypt(newUser.id.toString(), process.env.SECRET_KEY)
             const encryptedUserIdString = encryptedUserId.toString()
-
+            console.log(newUser.id)
             // save to cookie encryptedUserId
             res.cookie('userId',encryptedUserIdString)             
-            res.redirect('/#')
+            res.redirect('/')
         }
 
     } catch(err) {
-        res.render('/', {message: err})
+        console.log(err)
+        res.render('users/register.ejs', {message: err})
     }
 })
 

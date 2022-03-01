@@ -1,6 +1,8 @@
 <div class="banner">
-<div class="header-spacer">
-<h1 class="spacer">Express Finance</h1>
-<h5 class="spacer">Test</h5>
-</div>
+  <div class="header-spacer">
+    <h1 class="spacer">Express Finance</h1>
+    <%if (user) { %>
+    <h5 class="spacer">Hello <%=user.firstname%>!</h5>
+    <% } %>
+  </div>
 </div>
