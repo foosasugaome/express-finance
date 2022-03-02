@@ -1,8 +1,9 @@
 <div class="container-full">
   <legend>Portfolio</legend>
   <p class="text-warning"><%=message%></p>
+  <%if(portfolio) {%>
   <div>
-    <%if(portfolio) {%>
+    
     <div class="list-group">
       <% portfolio.forEach(e => { %>
       
@@ -11,10 +12,11 @@
       
       <%})%>      
     </div>
-    <%}%>
+    
     <div>
       <br>
       <a href="/portfolio/add">➕ Portfolio</a>
   </div>
+  <%}%>
 
 </div>

@@ -4,21 +4,25 @@
   <div>Stocks</div>
 
   <table class="table table-hover">
-    <thead>
+    <thead>      
       <tr>
+        <th scope="col">&nbsp;</th>
         <th scope="col">&nbsp;</th>
         <th scope="col">Column heading</th>
         <th scope="col">Column heading</th>
-        <th scope="col">Column heading</th>
-      </tr>
+      </tr>      
     </thead>
     <tbody>
+      <% if(portfolio) { %> 
+        <% portfolio.forEach(element => { %>
     <tr>
-      <th scope="row">Symbol</th>
+      <td scope="row"><p><strong><%=element.symbol%></strong></p><p><small><%=element.stockname%></small></p></td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
+    <% }) %>
+    <% } %> 
   </tbody>
   </table>
 </div>

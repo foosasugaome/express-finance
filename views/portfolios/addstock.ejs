@@ -4,7 +4,7 @@
   <div>
     <h5>Add Stock</h5>
     <% if(portfolio) { %> 
-    <form action="/portfolio/add_stock/?symbol=<%=symbol%>" method="POST">
+    <form action="/portfolio/add_stock/?symbol=<%=symbol[0]%>&name=<%=symbol[1]%>" method="POST">
     <div class="form-group">
       <label for="exampleSelect1" class="form-label mt-4">Portfolio </label>
       <select class="form-select" id="exampleSelect1"  name="portfolioid">
@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
       <label class="col-form-label mt-4" for="inputDefault">Price</label>
-      <input type="number" class="form-control" placeholder="Price" id="inputDefault" name="price" value="0" required>
+      <input type="number" class="form-control" placeholder="Price" id="inputDefault" name="price" value="0" step=".01" min="0" required>
     </div>
     <div class="form-group">
       <label for="exampleSelect1" class="form-label mt-4">Transaction Type </label>

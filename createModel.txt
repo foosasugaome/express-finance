@@ -5,16 +5,16 @@ sequelize model:create --name user --attributes username:string,firstname:string
 sequelize model:create --name portfolio --attributes userId:integer,portfolioname:string,dateadded:date
 
 # join user - portfolio
-sequelize model:create --name user_portfolio --attributes userId:integer,portfolioId:integer
+sequelize model:create --name users_portfolios --attributes userId:integer,portfolioId:integer
 
 # portfoliodetails table
 sequelize model:create --name portfoliodetail --attributes portfolioId:integer,stockname:string,symbol:string,stockcount:integer,dateadded:date
 
 # join portfolio_portfoliodetails
-sequelize model:create --name portfolios_portfoliodetails --attributes portfolioId:integer,portfoliodetailsId:integer
+sequelize model:create --name portfolios_portfoliodetails --attributes portfolioId:integer,portfoliodetailId:integer
 
 # usertransactions
-sequelize model:create --name usertransaction --attributes userId:integer,portfoliodetailsId:integer,transdate:date,symbol:string,transtype:string,quantity:integer,price:integer
+sequelize model:create --name usertransaction --attributes userId:integer,portfolioId:integer,portfoliodetailId:integer,transdate:date,symbol:string,transtype:string,quantity:integer,price:integer
 
 # join portfolio - portfoliodetail - usertransaction
-sequelize model: create --name portfolios_portfoliodetails_usertransactions
+sequelize model:create --name portfolios_portfoliodetails_usertransactions --attributes portfolioId:integer,portfoliodetailId:integer,usertransactionId:integer
