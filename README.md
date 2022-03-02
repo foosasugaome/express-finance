@@ -195,9 +195,10 @@ User's dashboard
 4. News are published when clicking thet NEWS link in the navigation
 
 ## Changes
-1. Renamed table/model `portfoliocontent` to `portfoliodetails`
-2. Renamed column `portfoliocontentId` to `portfoliodetailsId` in `usertransactions` table/model.
-3. Renamed column `stockcount` to `quantity` in `usertransactions` table/model.
+1. Renamed table/model `portfoliocontent` to `portfoliodetail`
+2. Renamed table/model `usertransactions` to `usertransaction`
+3. Renamed column `portfoliocontentId` to `portfoliodetailsId` in `usertransaction` table/model.
+4. Renamed column `stockcount` to `quantity` in `usertransaction` table/model.
 
 ## RESTful routes changes/additions
 

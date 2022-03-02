@@ -8,11 +8,13 @@ sequelize model:create --name portfolio --attributes userId:integer,portfolionam
 sequelize model:create --name user_portfolio --attributes userId:integer,portfolioId:integer
 
 # portfoliodetails table
-sequelize model:create --name portfoliodetails --attributes portfolioId:integer,stockname:string,symbol:string,stockcount:integer,dateadded:date
+sequelize model:create --name portfoliodetail --attributes portfolioId:integer,stockname:string,symbol:string,stockcount:integer,dateadded:date
 
-# portfolio_portfoliodetails
-sequelize model:create --name portfolio_portfoliodetails --attributes portfolioId:integer,portfoliodetailsId:integer
+# join portfolio_portfoliodetails
+sequelize model:create --name portfolios_portfoliodetails --attributes portfolioId:integer,portfoliodetailsId:integer
 
 # usertransactions
 sequelize model:create --name usertransaction --attributes userId:integer,portfoliodetailsId:integer,transdate:date,symbol:string,transtype:string,quantity:integer,price:integer
 
+# join portfolio - portfoliodetail - usertransaction
+sequelize model: create --name portfolios_portfoliodetails_usertransactions
