@@ -22,7 +22,7 @@ Additional node packages are also needed :
 
 Run `npm install` to install all dependencies
 
-A free API key must be obtained from finnhub.io. This API key will be stored in the .env file. 
+A free API key must be obtained from finnhub.io. This API key will be stored in the .env file. (Read `Changes` section at the bottom of the page.) 
 
 ## ERD
 ![an imbedded draw.io png ERD](./wireframe/express_finance.drawio.png)
@@ -47,14 +47,14 @@ Table definitions :
 | portfolioname | varchar(50) | portfolio name |
 |dateadded | date | creation date of portfolio |
 
-##### portfoliocontent
+##### portfoliocontent (renamed to `portofliodetail`)
 | field name   | data type   | description   |
 |---|---|---|
 | id | serial_primary_key | primary key  |
 | portfolioId | foreign_key | linked to portfolio table pk |
 | stockname | varchar(255) | stock name |
 | symbol | varchar(10) | stock symbol |
-| stockcount | integer(8) | number of this stock in the portfolio |
+| stockcount | integer(8) | number of this stock in the portfolio (renamed to `stockcount`) |
 | dateadded | date | date added to portfolio |
 
 ##### usertransactions
@@ -66,8 +66,8 @@ Table definitions :
 | transdate | date | transaction date |
 | symbol | varchar(10) | stock symbol |
 | transtype | varchar(1) | transaction type. buy or sell |
-| stockcount | integer (8) | number of stocks bought or sold in the transaction |
-| price | double | purchase price of stock |
+| stockcount | integer (8) | number of stocks bought or sold in the transaction (renamed to `quantity`)|
+| price | double (changed to `decimal(10,2)`) | purchase price of stock |
 
 ##### watchlist
 | field name   | data type   | description   |
@@ -109,6 +109,7 @@ Table definitions :
 ### Register page
 * If the user has no account, they will be asked to register one.
 * The following information will be required to create an account :
+
         1. Username (this will be used as for logins)
         2. First Name 
         3. Last Name
@@ -129,8 +130,8 @@ Table definitions :
 
 ### Search stocks
 * This is tied to the search bar in the navigation. Any searches done will be displayed here.
-* Buttons to add to `Portfolio`  or `Watchlist` will diplayed  besided the results.
-* Links to each stocks information will be available here.
+* Buttons to add to `Portfolio`  or `Watchlist` will diplayed  beside the results.
+* Links to each stock information will be available here.
 
 ### Company profile
 * This will display the company's financial information as well as stock prices. 
@@ -179,7 +180,7 @@ User's dashboard
 
 
 ## MVP
-1. Creation of registration and login page. All data will be store in PostgresSql.
+1. Creation of registration and login page. All data will be stored in PostgresSql.
 2. Search and save stocks to portfolio and/or watchlist.
 3. Display stock prices.
 4. Show performance of stocks in the portfolio.
@@ -190,15 +191,19 @@ User's dashboard
 
 ## Progress
 1. User can now register and login. User can logout and clear session.
-2. User can create portfolios
-3. User can search stocks and add to portfolio
+2. User can create portfolios.
+3. User can search stocks and add to portfolio..
 4. News are published when clicking thet NEWS link in the navigation
+5. Performance of each stock can be viewed in portfolio.
+6. Watchlist contains current prices of stocks.
 
 ## Changes
 1. Renamed table/model `portfoliocontent` to `portfoliodetail`
 2. Renamed table/model `usertransactions` to `usertransaction`
 3. Renamed column `portfoliocontentId` to `portfoliodetailsId` in `usertransaction` table/model.
 4. Renamed column `stockcount` to `quantity` in `usertransaction` table/model.
+5. Renamed column `stockcount` to `quantity` in `portfoliodetail` table/model.
+6. Changed datatype of `price` in `usertransaction` table/model from `integer` to `decimal(10,2)`
 
 ## RESTful routes changes/additions
 
@@ -209,13 +214,16 @@ User's dashboard
 | GET | /portfolio/to?symbol | Renders addstock.ejs. Displays form for adding stock to a portfolio |
 | POST | /portfolio/add_stock/?symbol | Adds stocks to portfolio |
 | GET | /news | Renders news.ejs. Displays finance news |
+| GET | /watchlist/addstock?symbol | Adds stock to watchlist. Page redirected to `/watchlist`. This is the page view of watchlist. |
+
 
 ## TO DO
-1. Create watchlist table/model.
-2. List stocks of a selected portfolio.
-3. List stock of watchlist.
-4. Display portfolio performance. 
-5. Create company profile page. Shows news, stock quotes.
+- [x] Create watchlist table/model.
+- [x] List stocks of a selected portfolio.
+- [x] List stock of watchlist.
+- [x] Display portfolio performance. 
+- [ ] Create company profile page. Shows news, stock quotes.
+
 
 
 

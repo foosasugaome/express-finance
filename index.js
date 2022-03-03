@@ -36,6 +36,7 @@ app.use('/portfolio', require('./controllers/portfolio'))
 app.use('/watchlist', require('./controllers/watchlist'))
 app.use('/news', require('./controllers/news'))
 app.use('/lookup', require('./controllers/lookup'))
+app.use('/company',require('./controllers/company'))
 
 app.get('/', (req,res)=>{
     res.render('index.ejs')
