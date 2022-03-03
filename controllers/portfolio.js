@@ -111,12 +111,20 @@ router.get('/details/:id', async (req,res)=>{
             myObj.symbol=objPortfolio.portfoliodetails[i].dataValues.symbol
             myObj.stonkName=objPortfolio.portfoliodetails[i].dataValues.stockname                  
             myObj.quotes=apiFetch.data
+
             let qty = 0
+            let count = 0
+            let cost = 0    
             for(let j = 0; j < objPortfolio.usertransactions.length;j++) {
                 if(objPortfolio.usertransactions[j].symbol == objPortfolio.portfoliodetails[i].dataValues.symbol)  {
+                    count+=1
+                    if(objPortfolio.usertransactions[j].transtype == 'Buy') {
+                        cost += objPortfolio.usertransactions[j].price
+                    }
                     qty += objPortfolio.usertransactions[j].quantity                   
                 }  
             }
+            myObj.averageCost = cost/count
             myObj.qty = qty
             arrayPortfolio.push(myObj)                 
         }        
