@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('usertransactions', {
+    await queryInterface.createTable('watchlists', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,26 +11,14 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
-      portfolioId: {
-        type: Sequelize.INTEGER
-      },
-      portfoliodetailId: {
-        type: Sequelize.INTEGER
-      },
-      transdate: {
-        type: Sequelize.DATE
+      stockname: {
+        type: Sequelize.STRING
       },
       symbol: {
         type: Sequelize.STRING
       },
-      transtype: {
-        type: Sequelize.STRING
-      },
-      quantity: {
-        type: Sequelize.INTEGER
-      },
-      price: {
-        type: Sequelize.INTEGER
+      dateadded: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('usertransactions');
+    await queryInterface.dropTable('watchlists');
   }
 };

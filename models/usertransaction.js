@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     symbol: DataTypes.STRING,
     transtype: DataTypes.STRING,
     quantity: DataTypes.INTEGER,
-    price: DataTypes.INTEGER
+    price: DataTypes.NUMERIC
   }, {
     sequelize,
     modelName: 'usertransaction',

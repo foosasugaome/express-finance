@@ -2,7 +2,7 @@
   <legend>Portfolio</legend>
   <p class="text-warning"><%=message%></p>
   <div>
-    <h5>Add Stock</h5>
+    <h5>Stock Transaction</h5>
     <% if(portfolio) { %> 
     <form action="/portfolio/add_stock/?symbol=<%=symbol[0]%>&name=<%=symbol[1]%>" method="POST">
     <div class="form-group">
@@ -15,11 +15,11 @@
     </div>
     <div class="form-group">
       <label class="col-form-label mt-4" for="inputDefault">Quantity </label>
-      <input type="number" class="form-control" placeholder="Quantity" id="inputDefault" name="quantity" value="0" required>
+      <input type="number" class="form-control" placeholder="Quantity" id="inputDefault" name="quantity" value="0" min="1" required>
     </div>
     <div class="form-group">
       <label class="col-form-label mt-4" for="inputDefault">Price</label>
-      <input type="number" class="form-control" placeholder="Price" id="inputDefault" name="price" value="0" step=".01" min="0" required>
+      <input type="number" class="form-control" placeholder="Price" id="inputDefault" name="price" value="0" step=".01" min="1" required>
     </div>
     <div class="form-group">
       <label for="exampleSelect1" class="form-label mt-4">Transaction Type </label>

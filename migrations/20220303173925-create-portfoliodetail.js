@@ -17,7 +17,7 @@ module.exports = {
       symbol: {
         type: Sequelize.STRING
       },
-      stockcount: {
+      quantity: {
         type: Sequelize.INTEGER
       },
       dateadded: {

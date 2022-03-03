@@ -97,7 +97,8 @@ router.get('/details/:id', async (req,res)=>{
             const foundPortfolio = await db.portfolio.findOne({
             where: {id: req.params.id},
             include: [db.portfoliodetail,db.usertransaction]            
-        })         
+        })        
+        // console.log(foundPortfolio) 
         const objPortfolio = foundPortfolio.dataValues    
         const stonk = {}
         stonk.portfolioname = objPortfolio.portfolioname
@@ -128,9 +129,10 @@ router.get('/details/:id', async (req,res)=>{
             myObj.qty = qty
             arrayPortfolio.push(myObj)                 
         }        
-        stonk.stonks=arrayPortfolio                               
+        stonk.stonks=arrayPortfolio             
+        // res.send(stonks)                  
         res.render('portfolios/details.ejs',{message: null, portfolio: stonk})
-    } catch(err) {
+    } catch(err) {        
         res.render('portfolios/details.ejs',{message:err , portfolio: null})
     }    
 })
