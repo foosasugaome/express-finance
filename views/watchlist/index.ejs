@@ -1,0 +1,41 @@
+<div class="container-full">
+    <legend>Watchlist</legend>
+    <p class="text-warning"><%=message%></p>
+    <%if(watchlist) {%>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Current Price</th>                
+                    <th scope="col">Day Change</th>
+                    <th scope="col">Day Change(%)</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>                
+             <% watchlist.stonks.forEach(e=>{ %> 
+                <tr>
+                    <td><%= e.symbol%></td>
+                    <td><%= e.name%></td>            
+                    <td><%= e.quotes.c%></td>
+                    <td><% if(e.quotes.d < 0){ %>
+                        <p class="badge bg-danger">
+                      <%}else{%>
+                        <p class="badge bg-success">
+                      <%}%><%= e.quotes.d%></p</td>
+                    <td><% if(e.quotes.dp < 0){ %>
+                        <p class="badge bg-danger">
+                      <%}else{%>
+                        <p class="badge bg-success">
+                      <%}%>
+                        <%= e.quotes.dp%></p></td>
+                    <td><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>">➕ Portolio</a></td>
+                </tr>
+             <% }) %> 
+            </tbody>
+        </table>
+    <%}%>
+  
+  </div>
+  

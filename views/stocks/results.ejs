@@ -15,7 +15,7 @@
         <% for(i=0;i<result.bestMatches.length;i++) {%>
             <% if(result.bestMatches[i]["4. region"] == "United States") {%>
             <tr>
-                <td><a href="/portfolio/to?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Portfolio</a> | <a href="#">➕ Watchlist</a></td>                
+                <td><a href="/portfolio/to?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Portfolio</a> | <a href="/watchlist/addstock?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Watchlist</a></td>                
                 <th scope="row"><%=result.bestMatches[i]["1. symbol"]%></th>
                 <td><%=result.bestMatches[i]["2. name"]%></td>
                 <td><%=result.bestMatches[i]["3. type"]%></td>
