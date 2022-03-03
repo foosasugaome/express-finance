@@ -3,7 +3,7 @@ require('dotenv').config()
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 api_key.apiKey = process.env.API_TOKEN
 const finnhubClient = new finnhub.DefaultApi()
-
+const db = require('./models/index.js')
 // Stock candles
 // finnhubClient.stockCandles("AAPL", "D", 1590988249, 1591852249, (error, data, response) => {
 //     console.log(data)
@@ -376,3 +376,49 @@ const finnhubClient = new finnhub.DefaultApi()
 //  var unsubscribe = function(symbol) {
 //     socket.send(JSON.stringify({'type':'unsubscribe','symbol': symbol}))
 // }
+
+
+
+
+
+
+
+
+
+
+const axios = require('axios')
+require('dotenv').config()
+
+async function createObject(intPortfolioid){    
+    const foundPortfolio = await db.portfolio.findOne({
+        where: {id: intPortfolioid},
+        include: [db.portfoliodetail,db.usertransaction]            
+    })          
+    const objPortfolio = foundPortfolio.dataValues    
+    const stonk = {}
+    stonk.portfolioname = objPortfolio.portfolioname
+    const arrayPortfolio = []    
+    try {        
+        for(let i =0; i< objPortfolio.portfoliodetails.length; i++){
+            let myObj = {}
+            let querySymbol = objPortfolio.portfoliodetails[i].dataValues.symbol
+            const apiFetch = await axios.get(`https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.API_TOKEN}`)            
+            myObj.symbol=objPortfolio.portfoliodetails[i].dataValues.symbol
+            myObj.stonkName=objPortfolio.portfoliodetails[i].dataValues.stockname                  
+            myObj.quotes=apiFetch.data
+            arrayPortfolio.push(myObj)           
+        }        
+        stonk.stonks=arrayPortfolio        
+        console.log(stonk)
+        // stonk.stonks.forEach(element=>{
+        //     console.log(element.symbol)    
+        //     console.log(element.stonkName)
+        //     console.log(element.quotes.o)            
+        //     console.log('----------------')    
+        // })
+    }catch(err){
+        console.log(err)
+    }
+}
+createObject(3)
+

@@ -91,9 +91,11 @@ router.post('/add_stock', async (req, res) => {
 router.get('/details/:id', async (req,res)=>{
     try {
         const foundPortfolio = await db.portfoliodetail.findAll({
-            where: {portfolioId: req.params.id}            
-        })
-        res.render('portfolios/details.ejs',{message:null, portfolio: foundPortfolio})
+            where: {portfolioId: req.params.id},
+            include: [db.usertransaction]            
+        })         
+        
+    res.render('portfolios/details.ejs',{message:null, portfolio: foundPortfolio})
     } catch(err) {
         res.render('portfolios/details.ejs',{message:err , portfolio: null})
     }    
