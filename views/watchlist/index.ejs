@@ -16,8 +16,8 @@
             <tbody>                
              <% watchlist.stonks.forEach(e=>{ %> 
                 <tr>
-                    <td><%= e.symbol%></td>
-                    <td><%= e.name%></td>            
+                    <td><a href="/company/<%= e.symbol%>"><%= e.symbol%></a></td>
+                    <td><a href="/company/<%= e.symbol%>"><%= e.name%></a>></td>            
                     <td><%= e.quotes.c%></td>
                     <td><% if(e.quotes.d < 0){ %>
                         <p class="badge bg-danger">
