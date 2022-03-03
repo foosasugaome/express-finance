@@ -7,6 +7,9 @@ const axios = require('axios')
 const db = require('../models')
 const res = require('express/lib/response')
 
+
+
+
 router.get('/', async (req,res)=> {
     let servMsg = null
     if(res.locals.user){        
@@ -89,13 +92,36 @@ router.post('/add_stock', async (req, res) => {
 
 
 router.get('/details/:id', async (req,res)=>{
-    try {
-        const foundPortfolio = await db.portfoliodetail.findAll({
-            where: {portfolioId: req.params.id},
-            include: [db.usertransaction]            
+    try 
+        {
+            const foundPortfolio = await db.portfolio.findOne({
+            where: {id: req.params.id},
+            include: [db.portfoliodetail,db.usertransaction]            
         })         
-        
-    res.render('portfolios/details.ejs',{message:null, portfolio: foundPortfolio})
+        const objPortfolio = foundPortfolio.dataValues    
+        const stonk = {}
+        stonk.portfolioname = objPortfolio.portfolioname
+        const arrayPortfolio = [] 
+        for(let i =0; i< objPortfolio.portfoliodetails.length; i++){
+            let myObj = {}
+            let querySymbol = objPortfolio.portfoliodetails[i].dataValues.symbol
+            // let endPoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${querySymbol}&apikey=${process.env.ALPHAVANTAGE_API_KEY}`
+            let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.SANDBOX_API_TOKEN}`
+            const apiFetch = await axios.get(endPoint)            
+            myObj.symbol=objPortfolio.portfoliodetails[i].dataValues.symbol
+            myObj.stonkName=objPortfolio.portfoliodetails[i].dataValues.stockname                  
+            myObj.quotes=apiFetch.data
+            let qty = 0
+            for(let j = 0; j < objPortfolio.usertransactions.length;j++) {
+                if(objPortfolio.usertransactions[j].symbol == objPortfolio.portfoliodetails[i].dataValues.symbol)  {
+                    qty += objPortfolio.usertransactions[j].quantity                   
+                }  
+            }
+            myObj.qty = qty
+            arrayPortfolio.push(myObj)                 
+        }        
+        stonk.stonks=arrayPortfolio                               
+        res.render('portfolios/details.ejs',{message: null, portfolio: stonk})
     } catch(err) {
         res.render('portfolios/details.ejs',{message:err , portfolio: null})
     }    

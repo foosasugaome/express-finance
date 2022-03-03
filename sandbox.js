@@ -392,7 +392,8 @@ require('dotenv').config()
 async function createObject(intPortfolioid){    
     const foundPortfolio = await db.portfolio.findOne({
         where: {id: intPortfolioid},
-        include: [db.portfoliodetail,db.usertransaction]            
+        include: [db.portfoliodetail,db.usertransaction]
+        
     })          
     const objPortfolio = foundPortfolio.dataValues    
     const stonk = {}
@@ -406,7 +407,15 @@ async function createObject(intPortfolioid){
             myObj.symbol=objPortfolio.portfoliodetails[i].dataValues.symbol
             myObj.stonkName=objPortfolio.portfoliodetails[i].dataValues.stockname                  
             myObj.quotes=apiFetch.data
-            arrayPortfolio.push(myObj)           
+            
+            let qty = 0
+            for(let j = 0; j < objPortfolio.usertransactions.length;j++) {
+                if(objPortfolio.usertransactions[j].symbol == objPortfolio.portfoliodetails[i].dataValues.symbol)  {
+                    qty += objPortfolio.usertransactions[j].quantity                   
+                }  
+            }
+            myObj.qty = qty
+            arrayPortfolio.push(myObj)                 
         }        
         stonk.stonks=arrayPortfolio        
         console.log(stonk)

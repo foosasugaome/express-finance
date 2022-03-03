@@ -1,28 +1,57 @@
 <div class="container-full">
   <legend>Portfolio</legend>
-  <p class="text-warning"><%=message%></p>
-  <div>Stocks</div>
+  <p class="text-warning"></p>
+
+  <div><%=portfolio.portfolioname%></div>
 
   <table class="table table-hover">
-    <thead>      
+    <thead>
       <tr>
-        <th scope="col">&nbsp;</th>
-        <th scope="col">&nbsp;</th>
-        <th scope="col">Column heading</th>
-        <th scope="col">Column heading</th>
-      </tr>      
+        <th scope="col">Symbol</th>
+        <th scope="col">Current Price</th>
+        <th scope="col">Total Value</th>
+        <th scope="col">Change</th>
+        <th scope="col">% Change</th>
+      </tr>
     </thead>
     <tbody>
-      <% if(portfolio) { %> 
-        <% portfolio.forEach(element => { %>
-    <tr>
-      <td scope="row"><p><strong><%=element.symbol%></strong></p><p><small><%=element.stockname%></small></p></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <% }) %>
-    <% } %> 
-  </tbody>
+      <% const dollarUSLocale = new Intl.NumberFormat('en-US',{style:'currency',
+      currency:'USD',minimumFractionDigits:2}) %> <%
+      portfolio.stonks.forEach(element => { %>
+      <tr>
+        <td scope="row">
+          <p><strong><%=element.symbol%></strong><br />
+          <small><%=element.stonkName%></small></p>
+        </td>
+        <td>
+          <p>
+            <strong><%=dollarUSLocale.format(element.quotes.c)%></strong><br />
+            <small>Qty : <%=(element.qty)%></small>
+          </p>
+        </td>
+        <td>
+          <p>
+            <strong><%=dollarUSLocale.format(element.quotes.c * element.qty)%></strong><br />            
+          </p>
+        </td>
+        <td>
+          <% if(element.quotes.d < 0){ %>
+            <p class="badge bg-danger">
+          <%}else{%>
+            <p class="badge bg-success">
+          <%}%>
+          <%=element.quotes.d%></p>
+        </td>
+        <td>
+          <% if(element.quotes.dp < 0){ %>
+            <p class="badge bg-danger">
+          <%}else{%>
+            <p class="badge bg-success">
+          <%}%>
+          <%=element.quotes.dp%></p>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
   </table>
 </div>
