@@ -3,11 +3,12 @@
     "username": "root",
     "password": "password",
     "database": "express_finance",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "production": {
     "user_env_variable": "DATABASE_URL",
+
     "dialect": "postgres"
   }
 }
