@@ -7,9 +7,6 @@ const axios = require('axios')
 const db = require('../models')
 const res = require('express/lib/response')
 
-
-
-
 router.get('/', async (req,res)=> {
     let servMsg = null
     if(res.locals.user){        

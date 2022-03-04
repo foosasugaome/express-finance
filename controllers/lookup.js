@@ -6,7 +6,7 @@ require('dotenv').config()
 const axios = require('axios')
 
 
-// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+// get your own key from https://www.alphavantage.co/support/#api-key
 
 router.post('/', async (req, res)=>{
   let keyword = req.body.keyword

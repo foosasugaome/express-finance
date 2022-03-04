@@ -6,9 +6,6 @@ require('dotenv').config()
 const axios = require('axios')
 const db = require('../models')
 
-// API_TOKEN='c8dtp7qad3i91d977dt0'
-// SANDBOX_API_TOKEN='sandbox_c8dtp7qad3i91d977dtg'
-
 router.get('/:id', async (req,res) => {
     try  {
         let symbol = req.params.id
