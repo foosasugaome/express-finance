@@ -80,8 +80,6 @@ app.get('/', async (req,res)=>{
             objNews.title = 'News'
             objNews.news =newsArray
             
-            console.log(objNews.news[0][0])       
-            // res.send(objNews.news)
             res.render('index.ejs', {message: null, w : stonk,n:objNews.news})            
             
         } catch(err) {            
@@ -102,6 +100,6 @@ app.get('/logout', (req,res)=>{
 
 app.listen(PORT, err=> {
     if(err) console.log(err)
-    console.log(`Server listening to port : ${PORT}`)
+    console.log(`Server listening to port : ${PORT} 🎧`)
 
 })

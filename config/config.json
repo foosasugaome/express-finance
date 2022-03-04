@@ -5,5 +5,8 @@
     "database": "express_finance",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "production": {
+    "user_env_variable": "DATABASE_URL"
   }
 }
