@@ -1,6 +1,8 @@
-<div class="container-full">
-  <legend>Portfolio</legend>
-  <p class="text-warning"></p>
+<div class="container-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Portfolio</h4>
+      <h6 class="card-subtitle mb-2 text-muted"><p class="text-warning"><%=message%></p></h6>
 
   <div><%=portfolio.portfolioname%></div>
 
@@ -26,8 +28,8 @@
       <% grandReturnTotal += totalReturn %>
       <tr>
         <td scope="row">
-          <p><strong><%=element.symbol%></strong><br />
-          <small><%=element.stonkName%></small></p>
+          <p><a href="/company/<%=element.symbol%>"><strong><%=element.symbol%></strong><br />
+          <small><%=element.stonkName%></small></a></p>
         </td>
         <td>
           <p>
@@ -74,4 +76,6 @@
       </tr>
     </tbody>
   </table>
+</div>
+</div>
 </div>

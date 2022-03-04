@@ -19,15 +19,16 @@
           <a class="nav-link" href="/news">News</a>
         </li>        
       </ul>
-      <%if (user) { %>        
+      <% const dateNow = Date.now() %>
+        <% const today = new Date(dateNow) %> 
+        <span class="nav-link"><%= today.toDateString()%></span>
+        <%if (user) { %>        
         <a class="nav-link" href="/logout">Logout</a>
         <% } else { %>
         <a class="nav-link" href="/login">Login</a>
         <a class="nav-link" href="/register">Register</a>
         <%}%>
-        <% const dateNow = Date.now() %>
-        <% const today = new Date(dateNow) %> 
-        <%= today.toDateString()%>
+        
       <form class="d-flex" action="/lookup" method="POST">        
         <input class="form-control me-sm-2" type="text" placeholder="Search for symbol or name" name="keyword">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>

@@ -1,0 +1,77 @@
+<div class="container-full">
+ <h4><%=message%></h4>   
+<%if(user) {%>
+    <h5>Wecome back, <%=user.firstname%>!</h5>
+<table class="table">    
+    <tbody>      
+      <tr>
+         <%if(n){%>          
+            <td style="width: 60%;">    
+                <%for(let i = 0; i<n.length;i++) {%> 
+                    <%for(let j=0; j < n[i].length || j < 2; j++){%>
+                        <% if(n[i][j].image !=="") { %> 
+                        <div class="container-news">
+                        <img src="<%=n[i][j].image%>" class="news-tiny" />
+                        <div class="news-text">
+                            <a href="<%=n[i][j].url%>"  target="_blank"><%=n[i][i].headline%></a>
+                            <p><%=n[i][j].summary%></p>
+                            <% let unix_timestamp = n[i][i].datetime %> 
+                            <%let dateObj = new Date(unix_timestamp * 1000);%>
+                            <%let formattedDateTime = dateObj.toLocaleString();%>
+                            <p class="blockquote-footer">
+                                <small>Published : <%=formattedDateTime%> Source : <%=n[i][j].source%> <%if(n[i][j].related.length >0) {%>Tags : <%=n[i][j].related%> <%}%></small>
+                              </p>
+                        </div>
+                    </div>    
+                    <%}%>
+                    <%}%>    
+                <%}%>
+            </td>        
+        <%}%>
+        <%if(w){%>
+        <td style="width: 40%;">
+            <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Your watchlist</div>
+                <table class="table">
+                <tr><td>Symbol</td><td  style="text-align:right">Current Price</td></tr>
+                <% w.stonks.forEach(e=>{ %> 
+                <tr><td><%=e.symbol%></td><td style="text-align:right"><%=parseFloat(e.quotes.c)%></td></tr>                    
+                <%})%>                               
+              </table>
+        </td>
+        <%}%>        
+      </tr>
+</div>
+<%}else{%>
+
+    <div class="container-full">
+        <legend>News</legend>        
+        <%if(news.length>0){%>
+        <% news.forEach(element => { %>
+        <div class="container-news">
+          <img src="<%=element.image%>" class="news-thumbnail" />
+      
+          <div class="news-text">
+            <p class="badge bg-success"><%=element.category.toUpperCase()%></p>
+            <a href="<%=element.url%>" target="_blank">
+              <h5><%=element.headline%></h5></a>
+            <p><%=element.summary%></p>
+      
+            <% let unix_timestamp = element.datetime %> 
+            <%let dateObj = new Date(unix_timestamp * 1000);%>
+            <%let formattedDateTime = dateObj.toLocaleString();%>
+            <p class="blockquote-footer">
+              <small>Published : <%=formattedDateTime%> Source : <%=element.source%> <%if(element.related.length >0) {%>Tags : <%=element.related%> <%}%></small>
+            </p>
+      
+          </div>
+        </div>
+      
+        <% }) %>
+        <%}%>
+      </div>
+
+<%}%>
+<div class="container-full">
+    <!-- some other stuff goes here-->    
+</div>

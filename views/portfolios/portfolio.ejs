@@ -1,22 +1,23 @@
-<div class="container-full">
-  <legend>Portfolio</legend>
-  <p class="text-warning"><%=message%></p>
+<div class="container-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Portfolio</h4>
+      <h6 class="card-subtitle mb-2 text-muted"><p class="text-warning"><%=message%></p></h6>
+  
+  
   <%if(portfolio) {%>
   <div>
     
     <div class="list-group">
       <% portfolio.forEach(e => { %>
-      
-        <a href="/portfolio/details/<%=e.id%>" class="list-group-item list-group-item-action"><%= e.portfolioname %> </a>
-        <!-- <a href="#"><span class="badge bg-primary rounded-pill">Delete</span></a> -->
-      
+         <a href="/portfolio/details/<%=e.id%>" class="list-group-item list-group-item-action"><%= e.portfolioname %> </a>
       <%})%>      
-    </div>
-    
-    <div>
-      <br>
+    </div>    
+    <div class="card-footer text-muted">
       <a href="/portfolio/add">➕ Portfolio</a>
-  </div>
+    </div>
   <%}%>
+</div>
+</div>
 
 </div>
