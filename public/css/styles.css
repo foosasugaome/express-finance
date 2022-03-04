@@ -11915,12 +11915,13 @@
   background-color: #fff;
   margin: 10px;
   width: 50%;
+  min-width: 800px;
   padding: 20px 20px 20px 20px;
 }
 .container-forms {
   background-color: #fff;
   margin: 10px;
-  width: 350px;
+  width: 350px;  
   padding: 20px 20px 20px 20px;
 }
  .header-spacer {
@@ -11934,6 +11935,7 @@
    border-bottom: .05rem solid #CCC;
    padding: 20px 40px 40px;
    width: 100%;
+   min-width: 800px;
    display: flex;
  }
  .news-thumbnail {

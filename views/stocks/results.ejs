@@ -19,7 +19,8 @@
                 <td><small><a href="/company/<%=result.bestMatches[i]["1. symbol"]%>"><%=result.bestMatches[i]["2. name"]%></a></small></td>
                 <td><small><%=result.bestMatches[i]["3. type"]%></small></td>
                 <td><small><%=result.bestMatches[i]["4. region"]%></small></td>
-                <td><small><a href="/watchlist/addstock?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Watchlist</a></small></td>                
+                <td><small><a href="/portfolio/to?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Portfolio</a> |
+                    <a href="/watchlist/addstock?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">⭐ Watchlist</a></small></td>                
             </tr>
             <% }%>
         <%}%>

@@ -87,10 +87,10 @@ Table definitions :
 | GET | /lookup | Search stocks |
 | GET | /results/:id | Displays results | 
 | POST | /portfolio | create a new portofolio |
-| POST | /portofolio/:id/usertransactions | add stock to portfolio |
+| POST | /portofolio/:id/usertransactions | Add stocks to portfolio `(modified)`|
 | POST | /watchlist/:id | add stock to watchlist |
 | GET | /company/id | display company profile |
-| DELETE | /portofolio/:id | remove stock from portfolio |
+| DELETE | /portofolio/:id | remove stock from portfolio (Removed. Stocks can only be sold. Will use `/portofolio/:id`) |
 | DELETE | /watchlist/:id | remove stock from watchlist |
 | GET | /logout | logout |
 
@@ -204,6 +204,7 @@ User's dashboard
 4. Renamed column `stockcount` to `quantity` in `usertransaction` table/model.
 5. Renamed column `stockcount` to `quantity` in `portfoliodetail` table/model.
 6. Changed datatype of `price` in `usertransaction` table/model from `integer` to `decimal(10,2)`
+7. Stocks will not be removed from porfolio. Instead, it will be closed after selling all.
 
 ## RESTful routes changes/additions
 

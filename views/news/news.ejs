@@ -22,7 +22,6 @@
       <a href="<%=element.url%>" target="_blank">
         <h5><%=element.headline%></h5></a>
       <p><%=element.summary%></p>
-
       <% let unix_timestamp = element.datetime %> 
       <%let dateObj = new Date(unix_timestamp * 1000);%>
       <%let formattedDateTime = dateObj.toLocaleString();%>
