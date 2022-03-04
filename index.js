@@ -7,6 +7,7 @@ const cryptoJS = require('crypto-js')
 const db = require('./models/index.js')
 const PORT = process.env.PORT || 8000
 const axios = require('axios')
+const methodOverride = require("method-override");
 
 // MIDDLEWARE
 app.set('view engine', 'ejs') 
@@ -15,6 +16,7 @@ app.use(cookieParser())
 app.use(express.urlencoded({extended: false})) 
 app.use(express.static('public'))
 app.use(require('morgan')('dev'));
+app.use(methodOverride("_method"));
 
 // CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next)=>{

@@ -5,6 +5,7 @@ const finnhub = require('finnhub')
 require('dotenv').config()
 const axios = require('axios')
 const db = require('../models')
+const { response } = require('express')
 
 router.get('/', async (req,res)=> {
     let servMsg = null
@@ -73,5 +74,21 @@ router.get('/addstock', async (req, res) => {
     }   
 })
 
+router.delete("/:id", async (req,res) => {
+    if(res.locals.user){
+        try {
+            const foundRecord = await db.watchlist.findOne({
+                where: {userId: res.locals.user.id,symbol: req.body.symbol}
+            })
+            await foundRecord.destroy()
+            res.redirect('/watchlist')    
+        } catch(err) {
+            res.render('watchlist/index.ejs', {message: err, watchlist: null})    
+        }
+    }else {
+        res.render('./user/login.ejs', {message : 'Your session timed out.'})
+    }
+
+})
 
 module.exports = router

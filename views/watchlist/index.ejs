@@ -36,7 +36,12 @@
                       <%}%>
                       <small>
                         <%= e.quotes.dp%></small></p></td>
-                    <td style="text-align: right;"><p class="badge rounded-pill bg-success"><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>" >Add to portolio</a></p></td>
+                    <td style="text-align: right;"><p class="badge rounded-pill bg-success"><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>" >Add to portolio</a>
+                    <form action="/watchlist/<%=e.symbol%>?_method=DELETE" method="POST">
+                      <input type="hidden" name="symbol" value="<%=e.symbol%>">
+                      <button type="submit" class="badge rounded-pill bg-danger">➖Remove from watchlist</button>
+                    </form>
+                    </p></td>
                 </tr>
              <% }) %> 
             </tbody>
