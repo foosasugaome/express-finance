@@ -13,8 +13,8 @@
                         <div class="container-news">
                         <img src="<%=n[i][j].image%>" class="news-tiny" />
                         <div class="news-text">
-                            <a href="<%=n[i][j].url%>"  target="_blank"><%=n[i][i].headline%></a>
-                            <p><%=n[i][j].summary%></p>
+                            <small><a href="<%=n[i][j].url%>"  target="_blank"><%=n[i][i].headline%></a></small>
+                            <p class="text-muted"><small><%=n[i][j].summary%></small></p>
                             <% let unix_timestamp = n[i][i].datetime %> 
                             <%let dateObj = new Date(unix_timestamp * 1000);%>
                             <%let formattedDateTime = dateObj.toLocaleString();%>
@@ -29,13 +29,14 @@
             </td>        
         <%}%>
         <%if(w){%>
-        <td style="width: 40%;">
+        <td style="width: 40%;padding-left: 40px;">
             <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Your watchlist</div>
+                <div class="card-header"><small>Your watchlist</small></div>
                 <table class="table">
-                <tr><td>Symbol</td><td  style="text-align:right">Current Price</td></tr>
+                <tr><td><small>Symbol</small></td><td  style="text-align:right"><small>Current Price</small></td></tr>
                 <% w.stonks.forEach(e=>{ %> 
-                <tr><td><%=e.symbol%></td><td style="text-align:right"><%=parseFloat(e.quotes.c)%></td></tr>                    
+                <tr><td><small><%=e.symbol%></small></td><td style="text-align:right"><small><%=parseFloat(e.quotes.c)%></small></td>
+                </tr>                    
                 <%})%>                               
               </table>
         </td>

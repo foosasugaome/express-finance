@@ -8,32 +8,35 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Symbol</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Current Price</th>                
-                    <th scope="col">Day Change</th>
-                    <th scope="col">Day Change(%)</th>
                     <th scope="col">&nbsp;</th>
+                   
+                    <th scope="col" style="text-align: right;">Current Price</th>                
+                    <th scope="col" style="text-align: right;">Day Change</th>
+                    <th scope="col" style="text-align: right;">Day Change(%)</th>
+                    <th scope="col" style="text-align: right;">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>                
              <% watchlist.stonks.forEach(e=>{ %> 
                 <tr>
-                    <td><a href="/company/<%= e.symbol%>"><%= e.symbol%></a></td>
-                    <td><a href="/company/<%= e.symbol%>"><%= e.name%></a></td>            
-                    <td><%= e.quotes.c%></td>
-                    <td><% if(e.quotes.d < 0){ %>
-                        <p class="badge bg-danger">
-                      <%}else{%>
-                        <p class="badge bg-success">
-                      <%}%><%= e.quotes.d%></p</td>
-                    <td><% if(e.quotes.dp < 0){ %>
+                    <td><a href="/company/<%= e.symbol%>"><small><strong><%= e.symbol%></strong></small><br /><small><small><%= e.name%></small></small></a>
+                    </td>                    
+                    <td style="text-align: right;"><small><%= e.quotes.c%></small></td>
+                    <td style="text-align: right;"><% if(e.quotes.d < 0){ %>
                         <p class="badge bg-danger">
                       <%}else{%>
                         <p class="badge bg-success">
                       <%}%>
-                        <%= e.quotes.dp%></p></td>
-                    <td><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>">➕ Portolio</a></td>
+                      <small>
+                      <%= e.quotes.d%></small></p></td>
+                    <td style="text-align: right;"><% if(e.quotes.dp < 0){ %>
+                        <p class="badge bg-danger">
+                      <%}else{%>
+                        <p class="badge bg-success">
+                      <%}%>
+                      <small>
+                        <%= e.quotes.dp%></small></p></td>
+                    <td style="text-align: right;"><p class="badge rounded-pill bg-success"><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>" >Add to portolio</a></p></td>
                 </tr>
              <% }) %> 
             </tbody>

@@ -10,7 +10,7 @@
     <thead>
       <tr>
         <th scope="col">Symbol</th>
-        <th scope="col">Current Price/Cost</th>
+        <th scope="col">Value/Cost</th>
         <th scope="col">Total Value</th>
         <th scope="col">All Time Return</th>
         <th scope="col">Day Change</th>
@@ -27,50 +27,68 @@
       <% grandTotal += totalValue %>
       <% grandReturnTotal += totalReturn %>
       <tr>
-        <td scope="row">
-          <p><a href="/company/<%=element.symbol%>"><strong><%=element.symbol%></strong><br />
-          <small><%=element.stonkName%></small></a></p>
-        </td>
         <td>
+          <p><small><a href="/company/<%=element.symbol%>"><strong><%=element.symbol%></strong><br />
+          <small><%=element.stonkName%></small></a></small></p>
+        </td>
+        <td style="text-align: right;">
           <p>
-            <strong><%=dollarUSLocale.format(element.quotes.c)%></strong><br />
-            <small><%=(element.qty)%> @ <%=dollarUSLocale.format(element.averageCost)%></small>
+            <small><strong><%=dollarUSLocale.format(element.quotes.c)%></strong></small><br />
+            <small><small><%=(element.qty)%> @ <%=dollarUSLocale.format(element.averageCost)%></small></small>
           </p>
         </td>
-        <td>
-          <p>
-            <strong><%=dollarUSLocale.format(totalValue)%></strong><br />            
+        <td style="text-align: right;">
+         <p>
+            <small>
+            <strong><%=dollarUSLocale.format(totalValue)%></strong>
+          </small>
           </p>
         </td>
-        <td>
-          <p>
-            
-            <strong><%=dollarUSLocale.format(totalReturn)%></strong><br />            
+        <td style="text-align: right;">
+          <% if(totalReturn < 0) {%> 
+            <p class="text-danger">
+          <% } else { %> 
+            <p class="text-success">
+              <%}%>
+          <small>            
+            <strong><%=dollarUSLocale.format(totalReturn)%></strong>
+          </small>
           </p>
         </td>
-        <td>
+        <td style="text-align: right;">
+          
           <% if(element.quotes.d < 0){ %>
             <p class="badge bg-danger">
           <%}else{%>
             <p class="badge bg-success">
           <%}%>
-          <%=element.quotes.d%></p>
+          <small>
+          <%=element.quotes.d%>
+          </small>
+          </p>
         </td>
-        <td>
+        <td style="text-align: right;">
           <% if(element.quotes.dp < 0){ %>
             <p class="badge bg-danger">
           <%}else{%>
             <p class="badge bg-success">
           <%}%>
-          <%=element.quotes.dp%></p>
+          <small>
+          <%=element.quotes.dp%></small></p>
         </td>
       </tr>
       <% }) %>
       <tr>
-        <th scope="row">Totals</th>
+        <th scope="row"><small>Totals</small></th>
         <td>&nbsp;</td>
-        <td><%=dollarUSLocale.format(grandTotal)%></td>
-        <td><%=dollarUSLocale.format(grandReturnTotal)%></td>
+        <td style="text-align: right;"><small><strong><%=dollarUSLocale.format(grandTotal)%></strong></small></td>
+        <td style="text-align: right;">
+          <% if(grandReturnTotal < 0) {%> 
+            <p class="text-danger">
+          <% } else { %> 
+            <p class="text-success">
+              <%}%>
+          <small><strong><%=dollarUSLocale.format(grandReturnTotal)%></strong></small></p></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>

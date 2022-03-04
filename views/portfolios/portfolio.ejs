@@ -10,11 +10,11 @@
     
     <div class="list-group">
       <% portfolio.forEach(e => { %>
-         <a href="/portfolio/details/<%=e.id%>" class="list-group-item list-group-item-action"><%= e.portfolioname %> </a>
+        <small> <a href="/portfolio/details/<%=e.id%>" class="list-group-item list-group-item-action"><%= e.portfolioname %> </a></small>
       <%})%>      
     </div>    
-    <div class="card-footer text-muted">
-      <a href="/portfolio/add">➕ Portfolio</a>
+    <div class="card-footer text-muted"><small>
+      <a href="/portfolio/add">➕ Portfolio</a></small>
     </div>
   <%}%>
 </div>

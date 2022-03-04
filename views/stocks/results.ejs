@@ -1,5 +1,5 @@
-<div class="container-full">
-    <legend>Portfolio</legend>
+<div class="container-card">
+    <legend>Stocks search</legend>
     <p class="text-warning"><%=message%></p>
     <table class="table table-hover">
         <thead>
@@ -15,11 +15,11 @@
         <% for(i=0;i<result.bestMatches.length;i++) {%>
             <% if(result.bestMatches[i]["4. region"] == "United States") {%>
             <tr>            
-                <th scope="row"><a href="/company/<%=result.bestMatches[i]["1. symbol"]%>"><%=result.bestMatches[i]["1. symbol"]%></a></th>
-                <td><a href="/company/<%=result.bestMatches[i]["1. symbol"]%>"><%=result.bestMatches[i]["2. name"]%></a></td>
-                <td><%=result.bestMatches[i]["3. type"]%></td>
-                <td><%=result.bestMatches[i]["4. region"]%></td>
-                <td><a href="/portfolio/to?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Portfolio</a> | <a href="/watchlist/addstock?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Watchlist</a></td>                
+                <th scope="row"><a href="/company/<%=result.bestMatches[i]["1. symbol"]%>"><small><%=result.bestMatches[i]["1. symbol"]%></small></a></th>
+                <td><small><a href="/company/<%=result.bestMatches[i]["1. symbol"]%>"><%=result.bestMatches[i]["2. name"]%></a></small></td>
+                <td><small><%=result.bestMatches[i]["3. type"]%></small></td>
+                <td><small><%=result.bestMatches[i]["4. region"]%></small></td>
+                <td><small><a href="/watchlist/addstock?symbol=<%=result.bestMatches[i]["1. symbol"]%>&name=<%=result.bestMatches[i]["2. name"]%>">➕ Watchlist</a></small></td>                
             </tr>
             <% }%>
         <%}%>

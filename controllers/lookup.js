@@ -14,7 +14,6 @@ router.post('/', async (req, res)=>{
 
   try {
     const response = await axios.get(endpoint)
-    // res.send(response.data.bestMatches)
     res.render('stocks/results.ejs', {message: null, result: response.data})    
   }catch(err) {    
     res.render('stocks/results.ejs', {message: err})
