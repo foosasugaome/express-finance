@@ -1,8 +1,6 @@
 const express = require('express')
 const router = express.Router()
 require('dotenv').config()
-const finnhub = require('finnhub')
-require('dotenv').config()
 const axios = require('axios')
 const db = require('../models')
 
@@ -32,9 +30,6 @@ router.get('/:id', async (req,res) => {
         
         const resNews = await axios.get(newsEndPoint)
         const news = resNews.data.data
-
-
-        console.log(quoteEndPoint)
 
         res.render('company/index.ejs',{message: null, quote: quote, profile: profile, news: news, isWatchList: isInWatchList})
 

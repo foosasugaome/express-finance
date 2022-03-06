@@ -9,7 +9,6 @@ router.get('/',(req,res)=> {
     res.render('users/register.ejs',{message: ''})
 })
 
-// pos
 router.post('/', async(req, res)=> {
     try {
         const [newUser, created] = await db.user.findOrCreate({
@@ -28,12 +27,8 @@ router.post('/', async(req, res)=> {
             newUser.lastname  = req.body.lastname
             newUser.status = 'Active'
             await newUser.save()
-
-            //encrypt id (AES)
             const encryptedUserId = cryptojs.AES.encrypt(newUser.id.toString(), process.env.SECRET_KEY)
             const encryptedUserIdString = encryptedUserId.toString()
-            console.log(newUser.id)
-            // save to cookie encryptedUserId
             res.cookie('userId',encryptedUserIdString)             
             res.redirect('/')
         }
@@ -43,5 +38,4 @@ router.post('/', async(req, res)=> {
         res.render('users/register.ejs', {message: err})
     }
 })
-
 module.exports = router

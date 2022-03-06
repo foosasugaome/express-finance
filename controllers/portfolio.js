@@ -151,7 +151,6 @@ router.get('/add', (req,res)=> {
 
 router.post('/add', async (req,res)=> {
     if(res.locals.user){
-
         try {
             const [newPortfolio, created] = await db.portfolio.findOrCreate({
                 where: {portfolioname: req.body.portfolio}        
@@ -164,14 +163,7 @@ router.post('/add', async (req,res)=> {
                 newPortfolio.userId = res.locals.user.id
                 newPortfolio.portfolioname = req.body.portfolio
                 newPortfolio.dateadded = Date.now()
-                await newPortfolio.save()
-    
-                // //encrypt id (AES)
-                // const encryptedUserId = cryptojs.AES.encrypt(newUser.id.toString(), process.env.SECRET_KEY)
-                // const encryptedUserIdString = encryptedUserId.toString()
-    
-                // // save to cookie encryptedUserId
-                // res.cookie('userId',encryptedUserIdString)             
+                await newPortfolio.save()    
                 res.redirect('/portfolio')
             }
         } catch(err) {

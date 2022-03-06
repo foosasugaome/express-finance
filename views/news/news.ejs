@@ -1,3 +1,16 @@
+<marquee behavior="scroll" direction="left" class="ticker"> 
+  <% if(quotes) {%>
+    <% for(let x = 0; x < quotes.length; x++) { %> 
+      <%=quotes[x].ticker%> : <%=quotes[x].price%>(<%=quotes[x].day_change%>) | 
+    <%}%>     
+  <%}%>
+  <%if(crypto) {%>
+      <% for(let p = 0; p< crypto.length;p++){ %> 
+          <%=crypto[p][0].symbol%> : <%=crypto[p][0].price%> (<%=crypto[p][0].change_percent%>) | 
+      <%}%>
+  <%}%>
+</marquee>
+
 <div class="flex-container">
   <div class="card-news-full">
     <legend>News</legend>
