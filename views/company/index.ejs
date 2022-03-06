@@ -1,6 +1,6 @@
 <div class="flex-container">    
     <%if(quote) {%>          
-    <div class="card-quote">                    
+    <div class="card">                    
         <h2><%=quote[0].ticker%></h2>
         <h4><%=quote[0].name%> </h4>
         <br>
@@ -46,7 +46,7 @@
         <p class="sub-header-muted"><small>Last trade : <%=dispDate%></small></p>
     </div>
 
-    <div class="card-profile">
+    <div class="card">
         <h4><%=quote[0].name%> </h4>
         <br>                  
         <hr>               
@@ -67,7 +67,7 @@
             <p class="sub-header-muted"><%=profile[0].description%></p>
     </div>
     
-    <div class="card-news">
+    <div class="card">
         <h4>Latest News for <%=quote[0].ticker%></h4>        
         <br>
         <hr>
@@ -84,8 +84,8 @@
 
     
     <%} else {%>  
-    <div class="card-profile">
-        <h4><%=message%></h4>
+    <div class="card">
+        <h5><%=message%></h5>
         <br>
         <br>
         <br>        
