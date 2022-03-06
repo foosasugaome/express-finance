@@ -1,20 +1,21 @@
-<div class="container-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Portfolio</h4>
-      <h6 class="card-subtitle mb-2 text-muted"><p class="text-warning"><%=message%></p></h6>
-
-  <div><%=portfolio.portfolioname%></div>
-
-  <table class="table table-hover">
+<h5><%=message%></h5>
+<div class="flex-container">
+  <!-- start of flex container -->
+  <div class="card-portfolio">
+    <h5>Portfolio : <%=portfolio.portfolioname%></h5>
+    <br>
+    <hr>
+    <br>
+    
+  <table style="width:100%;">
     <thead>
       <tr>
-        <th scope="col"><small>Symbol</small></th>
-        <th scope="col"><small>Value/Cost</small></th>
-        <th scope="col"><small>Total Value</small></th>
-        <th scope="col"><small>All Time Return</small></th>
-        <th scope="col"><small>Day Change</small></th>
-        <th scope="col"><small>Day Change(%)</small></th>
+        <th class="align-left">Symbol</th>
+        <th class="align-right">Value/Cost</th>
+        <th class="align-right">Total Value</th>
+        <th class="align-right"v>All Time Return</th>
+        <th class="align-right">Day Change</th>
+        <th class="align-right">Day Change(%)</th>
       </tr>
     </thead>
     <tbody>
@@ -26,74 +27,68 @@
       <% let totalReturn = totalValue - (element.qty * element.averageCost) %>
       <% grandTotal += totalValue %>
       <% grandReturnTotal += totalReturn %>
+      <% let eleClass="success"%> 
+      <% if(totalReturn < 0) {%> 
+      <% eleClass = "danger" %>       
+      <%}%>
       <tr>
         <td>
-          <p><small><a href="/company/<%=element.symbol%>"><strong><%=element.symbol%></strong><br />
-          <small><%=element.stonkName%></small></a></small></p>
+          <p class="<%=eleClass%>"><a href="/company/<%=element.symbol%>"><%=element.symbol%><br />
+          <small><%=element.stonkName%></small></a></p>
         </td>
-        <td style="text-align: right;">
+        <td class="align-right">
           <p>
-            <small><strong><%=dollarUSLocale.format(element.quotes.c)%></strong></small><br />
-            <small><small><%=(element.qty)%> @ <%=dollarUSLocale.format(element.averageCost)%></small></small>
+            <%=dollarUSLocale.format(element.quotes.c)%><br />
+            <small><%=(element.qty)%> @ <%=dollarUSLocale.format(element.averageCost)%></small>
           </p>
         </td>
-        <td style="text-align: right;">
-         <p>
-            <small>
-            <strong><%=dollarUSLocale.format(totalValue)%></strong>
-          </small>
+        <td class="align-right">
+          <p>            
+            <%=dollarUSLocale.format(totalValue)%>          
           </p>
         </td>
-        <td style="text-align: right;">
-          <% if(totalReturn < 0) {%> 
-            <p class="text-danger">
-          <% } else { %> 
-            <p class="text-success">
-              <%}%>
-          <small>            
-            <strong><%=dollarUSLocale.format(totalReturn)%></strong>
-          </small>
+        <td class="align-right">
+          <p class="<%=eleClass%>">
+            <%=dollarUSLocale.format(totalReturn)%>          
           </p>
         </td>
-        <td style="text-align: right;">
-          
+        <td class="align-right">          
           <% if(element.quotes.d < 0){ %>
-            <p class="badge bg-danger">
+            <p class="danger">
           <%}else{%>
-            <p class="badge bg-success">
-          <%}%>
-          <small>
-          <%=element.quotes.d%>
-          </small>
+            <p class="success">
+          <%}%>          
+          <%=element.quotes.d%>          
           </p>
         </td>
-        <td style="text-align: right;">
+        <td class="align-right">
           <% if(element.quotes.dp < 0){ %>
-            <p class="badge bg-danger">
+            <p class="danger">
           <%}else{%>
-            <p class="badge bg-success">
-          <%}%>
-          <small>
-          <%=element.quotes.dp%></small></p>
+            <p class="success">
+          <%}%>          
+          <%=element.quotes.dp%></p>
         </td>
       </tr>
       <% }) %>
       <tr>
-        <th scope="row"><small>Totals</small></th>
-        <td>&nbsp;</td>
-        <td style="text-align: right;"><small><strong><%=dollarUSLocale.format(grandTotal)%></strong></small></td>
-        <td style="text-align: right;">
+        <td scope="row">&nbsp;</td>
+        <td class="align-right"><hr >&nbsp;<p><strong>Totals</strong></p></td>
+        <td class="align-right"><hr >&nbsp;<p><strong><%=dollarUSLocale.format(grandTotal)%></strong></p></td>
+        <td class="align-right">
+          <hr >&nbsp;
           <% if(grandReturnTotal < 0) {%> 
-            <p class="text-danger">
+            <p class="danger">
           <% } else { %> 
-            <p class="text-success">
+            <p class="success">
               <%}%>
-          <small><strong><%=dollarUSLocale.format(grandReturnTotal)%></strong></small></p></td>
+              <strong><%=dollarUSLocale.format(grandReturnTotal)%></strong></p></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
     </tbody>
   </table>
 </div>
+  <!-- end of flex container -->
 </div>
-</div>
+     

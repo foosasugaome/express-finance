@@ -1,23 +1,21 @@
-<div class="container-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Portfolio</h4>
-      <h6 class="card-subtitle mb-2 text-muted"><p class="text-warning"><%=message%></p></h6>
-  
-  
-  <%if(portfolio) {%>
-  <div>
-    
-    <div class="list-group">
+<div class="flex-container">
+  <div class="card-news">
+    <h4>Portfolio</h4>
+    <br>
+    <h6><%=message%></h6>
+    <hr>
+    <br>
+    <%if(portfolio) {%>
       <% portfolio.forEach(e => { %>
-        <small> <a href="/portfolio/details/<%=e.id%>" class="list-group-item list-group-item-action"><%= e.portfolioname %> </a></small>
-      <%})%>      
-    </div>    
-    <div class="card-footer text-muted"><small>
-      <a href="/portfolio/add">➕ Portfolio</a></small>
-    </div>
-  <%}%>
-</div>
+        <p class="sub-header">
+          <a href="/portfolio/details/<%=e.id%>"><%= e.portfolioname %> </a>
+        </p>
+        <br>
+      <%})%>     
+      <p class="sub-header"><a href="/portfolio/add">➕ Portfolio</a></p>
+      <%}%>
+  </div>
 </div>
 
-</div>
+
+

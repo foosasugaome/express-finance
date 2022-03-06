@@ -30,14 +30,17 @@ router.get('/to', async (req,res)=> {
     let stockName = req.query.name
     let servMsg = null
     if(res.locals.user) {
-        try {            
+        try {                        
             const listPortfolio = await db.portfolio.findAll({
-                where: {userId: res.locals.user.id}
-            })
-            console.log(res.locals.user.id)
-            res.render('portfolios/addstock.ejs',{message: servMsg, symbol: [stockSymbol,stockName], portfolio: listPortfolio})
+                where: {userId: res.locals.user.id}                
+            })        
+            const endPoint = `https://api.stockdata.org/v1/data/quote?symbols=${stockSymbol}&api_token=${process.env.STOCKDATA_TOKEN}`    
+            const resQuote = await axios.get(endPoint)
+            const quote = resQuote.data.data[0]
+            res.render('portfolios/addstock.ejs',{message: null, symbol: [stockSymbol,stockName], portfolio: listPortfolio, quote: quote})
         } catch(err) {
-            res.render('portfolios/addstock.ejs',{message: err, portfolio: null})
+            console.log(err)
+            res.render('portfolios/addstock.ejs',{message: `Sorry something went wrong. Please contact your administrator.`, portfolio: null})
         }
     } else {
         res.render('./users/login.ejs', {message : 'Your session timed out.'})

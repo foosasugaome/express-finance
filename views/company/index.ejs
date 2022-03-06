@@ -1,84 +1,88 @@
-<!-- <div class="container-full">
-    <legend>Company Profile</legend>
+<div class="flex-container">    
+    <%if(quote) {%>
+    <div class="card-profile">
+        
+        <h3><%=quote[0].ticker%></h3>
+        <h4><%=quote[0].name%> </h4>          
+        <p class="sub-header-muted"><small>
+            <% if(isWatchList==false) {%> 
+            <a href="/watchlist/addstock?symbol=<%=quote[0].ticker%>&name=<%=quote[0].name%>&o=prof" class="btn-link">➕Add to watchlist</a>            
+            <% } else { %>
+                <form action="/company/<%=quote[0].ticker%>?_method=DELETE" method="POST">
+                    <input type="hidden" name="symbol" value="<%=quote[0].ticker%>">
+                    <button type="submit" class="btn-link">➖Remove from watchlist</button>
+                </form>
+            <% } %>
+        </small></p>
+        <hr>               
+        <br >
+            <p class="header-muted">Address</p>                    
+            <p class="sub-header-muted"><%=profile[0].address1%>, <%=profile[0].city%>, <%=profile[0].state%>, <%=profile[0].zip%>, <%=profile[0].country%></p> 
+            <p class="header-muted">Phone</p>                    
+            <p class="sub-header-muted"><%=profile[0].phone%></p> 
+            <p class="header-muted">Website</p>                    
+            <p class="sub-header-muted"><%=profile[0].website%></p>
+            <p class="header-muted">Industry</p>                    
+            <p class="sub-header-muted"><%=profile[0].industry%></p>
+            <p class="header-muted">Sector</p>                    
+            <p class="sub-header-muted"><%=profile[0].sector%></p>
+            <p class="header-muted">Employees</p>                    
+            <p class="sub-header-muted"><%=profile[0].full_time_employees%></p>
+            <p class="header-muted">About</p>                    
+            <p class="sub-header-muted"><%=profile[0].description%></p>
+    </div>
+    <div class="card-profile">                    
+        <h4>Real Time Data</h4>
+        <p class="header-muted">Listing exchange </p>                    
+        <p class="sub-header-muted"><%=quote[0].exchange_long%> (<%=quote[0].currency%>)</p>               
+        <hr><br />               
+        <p class="header-muted">Price</p>                    
+        <p class="sub-header-muted"><%=quote[0].price%></p> 
+        <p class="header-muted">Day high </p>                    
+        <p class="sub-header-muted"><%=quote[0].day_high%></p>     
+        <p class="header-muted">Day low</p>                    
+        <p class="sub-header-muted"><%=quote[0].day_low%></p>     
+        <p class="header-muted">Open</p>                    
+        <p class="sub-header-muted"><%=quote[0].day_open%></p>     
+        <p class="header-muted">52-week high</p>                    
+        <p class="sub-header-muted"><%=quote[0]['52_week_high']%></p>     
+        <p class="header-muted">52-week low</p>                    
+        <p class="sub-header-muted"><%=quote[0]['52_week_low']%></p>     
+        <p class="header-muted">Volume</p>                    
+        <p class="sub-header-muted"><%=quote[0].volume%></p>     
+        <p class="header-muted">Day change</p>                                             
+        <% if(quote[0].day_change < 0) { %> 
+        <p class="sub-header-muted danger">      
+        <% }else{ %> 
+            <p class="sub-header-muted">
+        <% } %> 
+        <%=quote[0].day_change%></p>
+        <% let tradeDate = quote[0].last_trade_time %>   
+        <% let objDate = new Date(tradeDate)%>
+        <% let dispDate = objDate.toLocaleString() %> 
+        <p class="sub-header-muted"><small>Last trade : <%=dispDate%></small></p>
+    </div>
     
-</div> -->
-<p class="text-warning"><%=message%></p>   
-<% const dollarUSLocale = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2}) %> 
-<div class="container-card"> 
-<div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title"><%=p.name%> (<%=p.ticker%>)</h5>
-      <h6 class="card-subtitle text-muted"><%=p.exchange%>. Currency in <%=p.currency%></h6>
-    </div>
-    <h3 class="card-header"><%=parseFloat(gq["05. price"])%> 
-        <small>
-    <%if(gq["09. change"] < 0){%> 
-        <span class="text-danger">
-    <% }else{ %> 
-        <span class="text-success">
-    <% }%>
-    <%=parseFloat(gq["09. change"])%> </span>
+    
 
-    <%if(parseFloat(gq["10. change percent"]) < 0){%> 
-        <span class="text-danger">
-    <% }else{ %> 
-        <span class="text-success">
-    <% }%>
-    (<%=gq["10. change percent"]%>)
-    </span>
-    </small>
-    </h3>
-    <a href="/watchlist/addstock?symbol=<%=p.ticker%>&name=<%=p.name%>" class="btn btn-outline-success" style="width:fit-content; margin:5px 5px 5px 5px;"><small>⭐ Add to watchlist</small></a>
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-      <rect width="100%" height="100%" fill="#868e96"></rect>
-      <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-    </svg> -->
-    <div class="card-body">
-      <p class="card-text">Summary</p>
+    <div class="card-news">
+        <h4>Latest News for <%=quote[0].ticker%></h4>        
+        <br>
+        <hr>
+        <br>
+        <%for(let i = 0; i < news.length; i++) {%>
+            <p class="sub-header"><a href="<%=news[i].url%>" target="_blank"><%=news[i].title%></a></p>
+            <p class="sub-header-muted"><%=news[i].description%></p>
+            <% let newsDate = news[i].published_at %> 
+            <% let dateObj = new Date(newsDate) %> 
+            <% formattedDate = dateObj.toLocaleString() %> 
+            <p class="sub-header-muted"><small>Source : <%=news[i].source%> Published : <%=formattedDate%></small></p>            
+        <% } %> 
+        
     </div>
-    <div class="card-body">
-        <table class="table table-hover">
-            <tbody>
-                <tr>
-                    <td style="width:25%">Previous Close </th>
-                    <td style="border-right: .05rem solid #d1d1cf;width:25%;text-align: right;"><%=parseFloat(gq["08. previous close"])%></td>
-                    <td style="width:25%">High </td>
-                    <td style="width:25%;text-align: right;"><%=parseFloat(gq["03. high"])%></td>
-                </tr>
-                <tr>
-                    <td style="width:25%">Open</th>
-                    <td style="border-right: .05rem solid #d1d1cf;width:25%;text-align: right;"><%=parseFloat(gq["02. open"])%></td>
-                    <td style="width:25%">Low </td>
-                    <td style="width:25%;text-align: right;"><%=parseFloat(gq["04. low"])%></td>
-                </tr>
-                <tr>
-                    <td style="width:25%">Volume </th>
-                    <td style="border-right: .05rem solid #d1d1cf;width:25%;text-align: right;"><%= gq["06. volume"] %></td>
-                    <td style="width:25%">&nbsp;</td>
-                    <td style="width:25%">&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>    
-    <!-- <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div> -->
-    <div class="card-footer text-muted">
-        Latest Trading Day : <%=gq["07. latest trading day"]%>
+    <%}%>    
+    <div class="card-profile">
+        <h5><%=message%></h5>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
 </div>
-<div class="container-half"> 
 
-    test
-    </div>

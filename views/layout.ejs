@@ -4,9 +4,17 @@
     <%- include('../views/partials/head.ejs')%>
 </head>
 <body>
-    <%- include('../views/partials/header.ejs')%>
-    <%- include('../views/partials/navigation.ejs')%>
-    <%- body%>
-    <script src="/js/script.js"></script>
+      <section class="layout">
+        <div class="logo"><img src="/assets/logo.png" class="logo"></div>
+        <div class="header"><%- include('../views/partials/header.ejs')%> </div>
+        <!-- <div class="search">     
+            
+        </div> -->
+        <div class="navigation">
+            <%- include('../views/partials/navigation.ejs')%>
+        </div>
+        <div class="main"><%- body%></div>        
+      </section>
+    <script src="/js/script.js"></script>    
 </body>
 </html>
