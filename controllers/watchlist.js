@@ -26,11 +26,8 @@ router.get('/', async (req,res)=> {
                 const resQuotes = await axios.get(endPoint)
                 stonk = resQuotes.data.data
             }
-            
-            // console.log(stonk)
             res.render('watchlist/index.ejs', {message: servMsg, watchlist : stonk})                        
-        } catch(err) {                        
-            console.log(err)
+        } catch(err) {                                    
             res.render('watchlist/index.ejs',{message: `Sorry something went wrong. Please contact your administrator.`, watchlist: null})           
         }                
     } else {
@@ -38,7 +35,6 @@ router.get('/', async (req,res)=> {
     }    
 })
 
-// add stock to watchlist
 router.get('/addstock', async (req, res) => {
     
     if(res.locals.user){        
@@ -52,8 +48,6 @@ router.get('/addstock', async (req, res) => {
                 newStock.dateadded = Date.now()
                 await newStock.save()
             }
-
-
             const addStock = await db.usertransaction.create({
                 userId: res.locals.user.id,                                
                 transdate: Date.now(),
@@ -90,5 +84,4 @@ router.delete("/:id", async (req,res) => {
     }
 
 })
-
-module.exports = router
+module.exports=router
