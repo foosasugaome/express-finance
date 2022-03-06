@@ -2,4 +2,5 @@ node_modules
 .env
 sandbox.js
 scrapCode.js
+codeyard.js
 package-lock.json
