@@ -122,7 +122,7 @@ router.get('/details/:id', async (req,res)=>{
                     if(objPortfolio.usertransactions[j].transtype == 'Buy') {
                         
                         cost += parseFloat(objPortfolio.usertransactions[j].price)
-                        console.log(objPortfolio.usertransactions[j].symbol + ' | ' + cost)
+                        
                     }
                     qty += objPortfolio.usertransactions[j].quantity                   
                 }  
