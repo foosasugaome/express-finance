@@ -1,35 +1,40 @@
-<div class="container-forms">
-    <form action="/login" method="POST">
-      <legend>Login</legend>
-      <p class="text-warning"><%=message%></p>
-      <div class="form-group">
-        <label for="inputUsername" class="form-label mt-4">User name</label>
-        <input        
-          type="text"
-          maxlength="25"
-          class="form-control"
-          id="inputUsername"
-          aria-describedby="emailHelp"
-          placeholder="User name"
-          name="username"
-        />
-      </div>
-      <div class="form-group">
-        <label for="inputPassword" class="form-label mt-4">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inputPassword"
-          placeholder="Password"
-          name="password"
-        />
-      </div>
-          <div class="form-group" id="errHolder">
-          &nbsp;
-        </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Login</button>
-      </div>
-    </form>
-  </div>
-  
+<div class="flex-container">
+<div class="card-forms">
+<h4>Login</h4>
+<h3 class="danger"><%=message%></h3>
+<br>
+<hr>
+<br>
+  <form action="/login" method="POST">
+  <table>
+    <tr>
+      <td class="header-muted"><label for="inputUsername">User name</label></td>
+      <td class="header-muted"><input        
+        type="text"
+        maxlength="25"
+        class="form-control"
+        id="inputUsername"
+        aria-describedby="emailHelp"
+        placeholder="User name"
+        name="username"
+      /></td>
+    </tr>
+    <tr>
+      <td class="header-muted"><label for="inputPassword">Password</label></td>
+      <td class="header-muted"><input
+        type="password"
+        class="form-control"
+        id="inputPassword"
+        placeholder="Password"
+        name="password"
+      /></td>
+    </tr>
+    <tr>
+      <td class="header-muted"></td>
+      <td class="header-muted"><button type="submit">Login</button></td>
+    </tr>    
+  </table>
+</form>
+</div>
+
+</div>

@@ -1,70 +1,39 @@
-<div class="container-forms">
-  <form action="/register" method="POST">
-    <legend>Register</legend>
-    <p class="text-warning"><%=message%></p>
-    <div class="form-group">
-      <label for="inputEmail" class="form-label mt-4">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="inputEmail"
-        aria-describedby="emailHelp"
-        placeholder="Enter email"
-        name="email"
-      />
-      <small id="emailHelp" class="form-text text-muted"
-        >We'll never share your email with anyone else.</small
-      >
-    </div>
-    <div class="form-group">
-      <label for="inputPassword" class="form-label mt-4">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="inputPassword"
-        placeholder="Password"
-        name="password"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="inputUsername" class="form-label mt-4">User name</label>
-      <input
-        type="text"
-        maxlength="25"
-        class="form-control"
-        id="inputUsername"
-        aria-describedby="emailHelp"
-        placeholder="User Name"
-        name="username"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="inputFirstName" class="form-label mt-4">First Name</label>
-      <input
-        type="text" maxlength="25"
-        class="form-control"
-        id="inputFirstName"
-        placeholder="First Name"
-        name="firstname"
-      />
-    </div>
-    <div class="form-group">
-        <label for="inputLastName" class="form-label mt-4">Last Name</label>
-        <input
-          type="text" maxlength="25"
-          class="form-control"
-          id="inputLastName"
-          placeholder="Last Name"
-          name="lastname"
-        />
-      </div>
-      <div class="form-group" id="errHolder">
-        &nbsp;
-      </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Register</button>
-    </div>
+<div class="flex-container">
+  <div class="card-forms">
+  <h4>Register</h4>
+  <h3 class="danger"><%=message%></h3>
+  <br>
+  <hr>
+  <br>
+    <form action="/register" method="POST">
+    <table>
+      <tr>
+        <td class="header-muted"><label for="inputEmail">Email address</label></td>
+        <td class="header-muted"><input type="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" /><br />
+        <small id="emailHelp">We'll never share your email with anyone else.</small></td>
+      </tr>
+      <tr>
+        <td class="header-muted"><label for="inputPassword">Password</label></td>
+        <td class="header-muted"><input type="password" id="inputPassword" placeholder="Password" name="password" /></td>
+      </tr>
+      <tr>
+        <td class="header-muted"><label for="inputUsername">User name</label>
+         </td>
+        <td class="header-muted"> <input type="text" maxlength="25" id="inputUsername" placeholder="User Name" name="username" required /></td>
+      </tr>    
+      <tr>
+        <td class="header-muted"><label for="inputFirstName">First Name</label>          </td>
+        <td class="header-muted"><input id="inputFirstName" placeholder="First Name" name="firstname" /></td>
+      </tr>    
+      <tr>
+        <td class="header-muted"><label for="inputLastName">Last Name</label></td>
+        <td class="header-muted"><input type="text" maxlength="25" id="inputLastName" placeholder="Last Name" name="lastname" /></td>
+      </tr>    
+      <tr>
+        <td class="header-muted"></td>
+        <td class="header-muted"><button type="submit">Register</button></td>
+      </tr>    
+    </table>
   </form>
+  </div>
 </div>

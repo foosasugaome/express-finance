@@ -52,7 +52,11 @@ app.get('/', async (req,res)=>{
             for(let i = 0; i < foundWatchlist.length; i++){
                 strSymbols += foundWatchlist[i].symbol + ","
             }
-
+            let cardHeader = 'Your watchlist'
+            if(strSymbols == "") {
+                strSymbols = 'AMZN,MSFT,TSLA,GOOG,V'
+                cardHeader = 'Tech Stocks'
+            }
             let quotesEndPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbols}&api_token=${process.env.STOCKDATA_TOKEN}`
             let responseQuotes = await axios.get(quotesEndPoint)
 
@@ -62,8 +66,9 @@ app.get('/', async (req,res)=>{
             let quotes = responseQuotes.data.data
             let news = responseNews.data.data
             const marqueeContent = "test"
+            console.log(quotes)
             
-            res.render('index.ejs', {message: null, news: news, quotes: quotes})
+            res.render('index.ejs', {message: null, news: news, quotes: quotes, cardHeader: cardHeader})
         }catch (err) {
             console.log(`console.log ${err}` )            
             res.render('index.ejs', {message: `An error has occured. Please contact your administrator.`, news: null, quotes: null})
