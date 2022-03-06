@@ -1,10 +1,23 @@
 <div class="flex-container">    
-    <%if(quote) {%>
-  
+    <%if(quote) {%>          
     <div class="card-quote">                    
+        <h2><%=quote[0].ticker%></h2>
+        <h4><%=quote[0].name%> </h4>
+        <br>
         <h4>Real Time Data</h4>
         <p class="header-muted">Listing exchange </p>                    
         <p class="sub-header-muted"><%=quote[0].exchange_long%> (<%=quote[0].currency%>)</p>               
+        <p class="sub-header-muted"><small>
+            <% if(isWatchList==false) {%> 
+            <a href="/watchlist/addstock?symbol=<%=quote[0].ticker%>&name=<%=quote[0].name%>&o=prof" class="btn-link">➕Add to watchlist</a>            
+            <% } else { %>
+                <form action="/company/<%=quote[0].ticker%>?_method=DELETE" method="POST">
+                    <input type="hidden" name="symbol" value="<%=quote[0].ticker%>">
+                    <button type="submit" class="btn-link">➖Remove from watchlist</button>
+                </form>
+            <% } %>
+        </small></p>
+        <br>
         <hr><br />               
         <p class="header-muted">Price</p>                    
         <p class="sub-header-muted"><%=quote[0].price%></p> 
@@ -49,19 +62,8 @@
     </div>
 
     <div class="card-profile">
-        
-        <h3><%=quote[0].ticker%></h3>
-        <h4><%=quote[0].name%> </h4>          
-        <p class="sub-header-muted"><small>
-            <% if(isWatchList==false) {%> 
-            <a href="/watchlist/addstock?symbol=<%=quote[0].ticker%>&name=<%=quote[0].name%>&o=prof" class="btn-link">➕Add to watchlist</a>            
-            <% } else { %>
-                <form action="/company/<%=quote[0].ticker%>?_method=DELETE" method="POST">
-                    <input type="hidden" name="symbol" value="<%=quote[0].ticker%>">
-                    <button type="submit" class="btn-link">➖Remove from watchlist</button>
-                </form>
-            <% } %>
-        </small></p>
+        <h4><%=quote[0].name%> </h4>
+        <br>                  
         <hr>               
         <br >
             <p class="header-muted">Address</p>                    
@@ -80,5 +82,13 @@
             <p class="sub-header-muted"><%=profile[0].description%></p>
     </div>
     <%}%>  
+    <div class="card-profile">
+        <h4><%=message%></h4>
+        <br>
+        <br>
+        <br>
+        
+    </div>   
+
 </div>
 
