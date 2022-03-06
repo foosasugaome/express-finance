@@ -1,53 +1,66 @@
-<div class="container-card">
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Watchlist</h4>
-      <h6 class="card-subtitle mb-2 text-muted"><p class="text-warning"><%=message%></p></h6>
+<h6><p><%=message%></p></h6>
+<div class="flex-container">
+<!-- start flex container -->
 
+<div class="card-portfolio">
+  <h5>Watchlist</h5>
+    <br>
+    <hr>
+    <br>
     <%if(watchlist) {%>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">&nbsp;</th>
-                   
-                    <th scope="col" style="text-align: right;"><small>Current Price</small></th>                
-                    <th scope="col" style="text-align: right;"><small>Day Change</small></th>
-                    <th scope="col" style="text-align: right;"><small>Day Change(%)</small></th>
-                    <th scope="col" style="text-align: right;">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>                
-             <% watchlist.stonks.forEach(e=>{ %> 
-                <tr>
-                    <td><a href="/company/<%= e.symbol%>"><small><strong><%= e.symbol%></strong></small><br /><small><small><%= e.name%></small></small></a>
-                    </td>                    
-                    <td style="text-align: right;"><small><%= e.quotes.c%></small></td>
-                    <td style="text-align: right;"><% if(e.quotes.d < 0){ %>
-                        <p class="badge bg-danger">
-                      <%}else{%>
-                        <p class="badge bg-success">
-                      <%}%>
-                      <small>
-                      <%= e.quotes.d%></small></p></td>
-                    <td style="text-align: right;"><% if(e.quotes.dp < 0){ %>
-                        <p class="badge bg-danger">
-                      <%}else{%>
-                        <p class="badge bg-success">
-                      <%}%>
-                      <small>
-                        <%= e.quotes.dp%></small></p></td>
-                    <td style="text-align: right;"><p class="badge rounded-pill bg-success"><a href="/portfolio/to?symbol=<%=e.symbol%>&name=<%=e.name%>" >Add to portolio</a>
-                    <form action="/watchlist/<%=e.symbol%>?_method=DELETE" method="POST">
-                      <input type="hidden" name="symbol" value="<%=e.symbol%>">
-                      <button type="submit" class="badge rounded-pill bg-danger">➖Remove from watchlist</button>
+      <table>
+          <thead>
+              <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Stock</th>                 
+                  <th scope="col">Current Price</th>                
+                  <th scope="col">Day Change</th>
+                  <th scope="col">Day Change(%)</th>
+                  <th scope="col">&nbsp;</th>
+                  
+              </tr>
+          </thead>
+          <tbody>                
+           <% for(let i = 0; i < watchlist.length; i++){ %> 
+              <tr>
+                <td>
+                  <form action="/watchlist/<%=watchlist[i].ticker%>?_method=DELETE" method="POST">
+                      <input type="hidden" name="symbol" value="<%=watchlist[i].ticker%>">
+                      <button type="submit" class="btn-link">Remove</button>
                     </form>
-                    </p></td>
-                </tr>
-             <% }) %> 
-            </tbody>
-        </table>
-    <%}%>
-      </div>
-      </div>
-  </div>
+                </td>
+                  <td><a href="/company/<%= watchlist[i].ticker%>"><p></p><strong><%= watchlist[i].ticker%></strong></p><p><small><%= watchlist[i].name%></small></p></a>
+                  </td>                    
+                  <td class="align-right"><%= watchlist[i].price%></td>
+
+                  <% let dayChangePercent = (watchlist[i].day_change / watchlist[i].price) * 100 %> 
+                  <td class="align-right"><% if(watchlist[i].day_change < 0){ %>
+                      <p class="danger">
+                    <%}else{%>
+                      <p class="success">
+                    <%}%>                    
+                    <%= watchlist[i].day_change%></p></td>
+                  <td class="align-right"><% if(dayChangePercent < 0){ %>
+                      <p class="danger">
+                    <%}else{%>
+                      <p class="success">
+                    <%}%>                    
+                      <%= dayChangePercent.toFixed(3)%></p></td>                  
+                  
+                  <td>
+                    <p class="btn-link"><a href="/portfolio/to?symbol=<%=watchlist[i].ticker%>&name=<%=watchlist[i].name%>" >➕ Portolio</a></p>
+                  </td>
+              </tr>
+           <% } %> 
+          </tbody>
+      </table>
+  <%}%>
+</div>
+
+
+
+
+<!-- end flex container -->
+</div>
+
   

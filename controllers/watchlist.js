@@ -5,7 +5,6 @@ const finnhub = require('finnhub')
 require('dotenv').config()
 const axios = require('axios')
 const db = require('../models')
-const { response } = require('express')
 
 router.get('/', async (req,res)=> {
     let servMsg = null
@@ -15,26 +14,30 @@ router.get('/', async (req,res)=> {
             const foundWatchList = await db.watchlist.findAll({
                 where: {userId: res.locals.user.id}                                      
             })     
-            console.log(foundWatchList.length)
-            const stonk = {}
-            stonk.watchlist = 'Watchlist'
-            const arrayWatchlist = [] 
-            for(let i =0; i<foundWatchList.length; i++) {
-                myObj = {}                
-                querySymbol = foundWatchList[i].symbol
-                let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.SANDBOX_API_TOKEN}`
-                const apiFetch = await axios.get(endPoint)            
-                myObj.symbol = foundWatchList[i].symbol
-                myObj.name = foundWatchList[i].stockname
-                myObj.quotes=apiFetch.data
-                arrayWatchlist.push(myObj)     
-            }                      
-            stonk.stonks= arrayWatchlist                 
-                    
-            res.render('watchlist/index.ejs', {message: servMsg, watchlist : stonk})            
             
-        } catch(err) {            
-            // console.log(err)
+            // const stonk = {}
+            // stonk.watchlist = 'Watchlist'
+            // const arrayWatchlist = [] 
+            let strSymbol = ""
+            for(let i =0; i<foundWatchList.length; i++) {
+                // myObj = {}                
+                // querySymbol = foundWatchList[i].symbol
+                // let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.API_TOKEN}`
+                // const apiFetch = await axios.get(endPoint)            
+                // myObj.symbol = foundWatchList[i].symbol
+                // myObj.name = foundWatchList[i].stockname
+                // myObj.quotes=apiFetch.data
+                // arrayWatchlist.push(myObj)     
+                strSymbol += `${foundWatchList[i].symbol},` 
+            }                 
+            let endPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbol}&api_token=${process.env.STOCKDATA_TOKEN}`     
+            // stonk.stonks= arrayWatchlist                 
+            // console.log(stonk.stonks)
+            const resQuotes = await axios.get(endPoint)
+            const stonk = resQuotes.data.data
+            // console.log(stonk)
+            res.render('watchlist/index.ejs', {message: servMsg, watchlist : stonk})                        
+        } catch(err) {                        
             res.render('watchlist/index.ejs',{message: err, watchlist: null})           
         }                
     } else {
@@ -64,8 +67,12 @@ router.get('/addstock', async (req, res) => {
                 stockname: req.query.name,
                 symbol:req.query.symbol            
             })
-            await addStock.save()            
-            res.redirect('/watchlist')
+            await addStock.save()      
+            if(req.query.o=="prof") {
+                res.redirect(`/company/${req.query.symbol}`)
+            }else {
+                res.redirect('/watchlist')
+            }                  
         }catch(err) {
             res.render('watchlist/index.ejs', {message: err, watchlist: null})    
         }        

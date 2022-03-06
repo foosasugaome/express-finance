@@ -1,36 +1,32 @@
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+<div class="flex-container">
+  <div class="card-news-full">
+    <legend>News</legend>
+    <hr />
+    <br />
+    <p class="text-warning"><%=message%></p>
+    <%if(news.length>0){%> <% news.forEach(element => { %>
+    <p class="sub-header">
+      <img src="<%=element.image%>" class="news-thumbnail" />
+    </p>
+    <p class="sub-header"><%=element.category.toUpperCase()%></p>
+    <a href="<%=element.url%>" target="_blank">
+      <h5><%=element.headline%></h5></a
+    >
+    <p class="sub-header-muted"><%=element.summary%></p>
+    <% let unix_timestamp = element.datetime %> <%let dateObj = new
+    Date(unix_timestamp * 1000);%> <%let formattedDateTime =
+    dateObj.toLocaleString();%>
+    <p class="sub-header-muted">
+      <small
+        >Published : <%=formattedDateTime%> Source : <%=element.source%>
+        <%if(element.related.length >0) {%>Tags : <%=element.related%>
+        <%}%></small
+      >
+    </p>
+    <br>
+    <hr>
+    <br>
+    <% }) %> <%}%>
   </div>
-
 </div>
-<button id="myBtn" style="visibility: hidden;">Open Modal</button>
 
-<div class="container-full">
-  <legend>News</legend>
-  <p class="text-warning"><%=message%></p>
-  <%if(news.length>0){%>
-  <% news.forEach(element => { %>
-  <div class="container-news">
-    <img src="<%=element.image%>" class="news-thumbnail" />
-
-    <div class="news-text">
-      <p class="badge bg-success"><%=element.category.toUpperCase()%></p>
-      <a href="<%=element.url%>" target="_blank">
-        <h5><%=element.headline%></h5></a>
-      <p><%=element.summary%></p>
-      <% let unix_timestamp = element.datetime %> 
-      <%let dateObj = new Date(unix_timestamp * 1000);%>
-      <%let formattedDateTime = dateObj.toLocaleString();%>
-      <p class="blockquote-footer">
-        <small>Published : <%=formattedDateTime%> Source : <%=element.source%> <%if(element.related.length >0) {%>Tags : <%=element.related%> <%}%></small>
-      </p>
-    </div>
-  </div>
-
-  <% }) %>
-  <%}%>
-</div>

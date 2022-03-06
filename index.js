@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8000
 const axios = require('axios')
 const methodOverride = require("method-override");
 
+
 // MIDDLEWARE
 app.set('view engine', 'ejs') 
 app.use(ejsLayouts) 
@@ -42,55 +43,36 @@ app.use('/lookup', require('./controllers/lookup'))
 app.use('/company',require('./controllers/company'))
 
 app.get('/', async (req,res)=>{
-    let servMsg = null
-    let querySymbol
-    if(res.locals.user){        
+    if(res.locals.user){
         try {
-            const foundWatchList = await db.watchlist.findAll({
-                where: {userId: res.locals.user.id}                                      
-            })                 
-            const stonk = {}
-            stonk.watchlist = 'Watchlist'
-            const arrayWatchlist = [] 
-            for(let i =0; i<foundWatchList.length; i++) {
-                myObj = {}                
-                querySymbol = foundWatchList[i].symbol
-                let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.SANDBOX_API_TOKEN}`
-                const apiFetch = await axios.get(endPoint)            
-                myObj.symbol = foundWatchList[i].symbol
-                myObj.name = foundWatchList[i].stockname
-                myObj.quotes=apiFetch.data
-                arrayWatchlist.push(myObj)                     
-            }                      
-            stonk.stonks= arrayWatchlist       
-            
-            //get related news
-            const objNews = {}
-            const newsArray = []
-            const endDate = new Date()
-            const startDate = new Date(endDate)
-            startDate.setDate(startDate.getDate()-1)
-            let formStartDate = startDate.toISOString().split('T')[0]
-            let formEndDate = endDate.toISOString().split('T')[0]            
-            for(let j = 0; j< stonk.stonks.length;j++) {            
-                let newsEndPoint = `https://finnhub.io/api/v1/company-news?symbol=${stonk.stonks[j].symbol}&from=${formStartDate}&to=${formEndDate}&token=${process.env.API_TOKEN}`
-                const apiFetchNews = await axios.get(newsEndPoint)
-                newsArray.push(apiFetchNews.data)                               
+            const foundWatchlist = await db.watchlist.findAll({
+                where: {userId: res.locals.user.id}
+            })
+            let strSymbols = ""
+            for(let i = 0; i < foundWatchlist.length; i++){
+                strSymbols += foundWatchlist[i].symbol + ","
             }
-            objNews.title = 'News'
-            objNews.news =newsArray
+
+            let quotesEndPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbols}&api_token=${process.env.STOCKDATA_TOKEN}`
+            let responseQuotes = await axios.get(quotesEndPoint)
+
+            let newsEndPoint = `https://api.stockdata.org/v1/news/all?symbols=${strSymbols}&filter_entities=false&language=en&api_token=${process.env.STOCKDATA_TOKEN}` 
+            let responseNews = await axios.get(newsEndPoint)
+
+            let quotes = responseQuotes.data.data
+            let news = responseNews.data.data
+            const marqueeContent = "test"
             
-            res.render('index.ejs', {message: null, w : stonk,n:objNews.news})            
-            
-        } catch(err) {            
-            
-            res.render('index.ejs',{message: err, w: null,n: null})           
+            res.render('index.ejs', {message: null, news: news, quotes: quotes})
+        }catch (err) {
+            console.log(`console.log ${err}` )            
+            res.render('index.ejs', {message: `An error has occured. Please contact your administrator.`, news: null, quotes: null})
         }
-    } else {
-        let endpoint = `https://finnhub.io/api/v1/news?category=general&token=${process.env.API_TOKEN}&minId=10`
-        const guestNews = await axios.get(endpoint)
-        res.render('index.ejs',{message: `Hello Guest!`, news:guestNews.data})
-    }    
+    }else{        
+        let endpoint = `https://api.stockdata.org/v1/news/all?symbols=TSLA%2CAMZN%2CMSFT&filter_entities=true&language=en&api_token=${process.env.STOCKDATA_TOKEN}`
+        const guestNews = await axios.get(endpoint)        
+        res.render('index.ejs',{message: `Hello Guest!`, news: guestNews.data.data})
+    }
 })
 
 app.get('/logout', (req,res)=>{

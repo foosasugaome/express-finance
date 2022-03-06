@@ -9,18 +9,57 @@ const db = require('../models')
 router.get('/:id', async (req,res) => {
     try  {
         let symbol = req.params.id
-        let endPoint_GLOBAL_QUOTE = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${process.env.ALPHAVANTAGE_API_KEY}`        
-        let endPoint_PROFILE = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${process.env.API_TOKEN}`
+        let isInWatchList = false        
 
-        const resGLOBAL_QUOTE = await axios.get(endPoint_GLOBAL_QUOTE)
-        const resProfile = await axios.get(endPoint_PROFILE)
+        const foundSymbol = await db.watchlist.findOne({
+            where: {userId: res.locals.user.id, symbol: symbol}            
+        })
+        if(foundSymbol) {            
+            isInWatchList= true
+        }
         
-        console.log(resGLOBAL_QUOTE.data["Global Quote"])
-        console.log(resProfile.data)
-        res.render('company/index.ejs',{message: null, gq: resGLOBAL_QUOTE.data["Global Quote"], p: resProfile.data})
+        let quoteEndPoint = `https://api.stockdata.org/v1/data/quote?symbols=${symbol}&api_token=${process.env.STOCKDATA_TOKEN}`
+
+        const resQuote = await axios.get(quoteEndPoint)
+        const quote = resQuote.data.data
+
+        let profileEndPoint = `https://api.stockdata.org/v1/entity/profile?symbols=${symbol}&api_token=${process.env.STOCKDATA_TOKEN}`
+        const resProfile = await axios.get(profileEndPoint)
+        const profile = resProfile.data.data
+        
+
+        let newsEndPoint = `https://api.stockdata.org/v1/news/all?symbols=${symbol}&filter_entities=true&language=en&api_token=${process.env.STOCKDATA_TOKEN}`
+        
+        const resNews = await axios.get(newsEndPoint)
+        const news = resNews.data.data
+
+
+        console.log(quoteEndPoint)
+
+        res.render('company/index.ejs',{message: null, quote: quote, profile: profile, news: news, isWatchList: isInWatchList})
+
     } catch(err) {
-        res.render('company/index.ejs',{message: err})    
+        console.log(err)
+        let errDisplay = `Sorry, we cannot pull data for ${req.params.id} at the moment. Please try again later.`
+        res.render('company/index.ejs',{message: errDisplay, quote:null})    
     }    
+})
+
+router.delete("/:id", async (req,res) => {
+    if(res.locals.user){
+        try {
+            const foundRecord = await db.watchlist.findOne({
+                where: {userId: res.locals.user.id,symbol: req.body.symbol}
+            })
+            await foundRecord.destroy()
+            res.redirect(`/company/${req.body.symbol}`)    
+        } catch(err) {
+            res.render('company/index.ejs', {message: err, quote: nuull, profile: null, news: null, isWatchList: null})    
+        }
+    }else {
+        res.render('./user/login.ejs', {message : 'Your session timed out.'})
+    }
+
 })
 
 

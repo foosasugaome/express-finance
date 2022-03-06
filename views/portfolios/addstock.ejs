@@ -1,41 +1,78 @@
-<div class="container-forms">
-  <legend>Portfolio</legend>
-  <p class="text-warning"><%=message%></p>
-  <div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Buy/Sell</h5>
-    <h6 class="card-subtitle mb-2 text-muted"><%=symbol[0]%> (<%=symbol[1]%>)</h6>
-    <% if(portfolio) { %> 
+<div class="flex-container">
+  <!-- start flex container -->
+  <% if(portfolio && user) { %> 
+  <div class="card-news">
+    <h5>Portofolio</h5>
+    <br>
+    <hr>
+    <br>    
+    <h5><%=symbol[0]%><h5><h6> (<%=symbol[1]%>)</h6>    
     <form action="/portfolio/add_stock/?symbol=<%=symbol[0]%>&name=<%=symbol[1]%>" method="POST">
-    <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Portfolio </label>
-      <select class="form-select" id="exampleSelect1"  name="portfolioid">
-        <% portfolio.forEach(e => { %>
-        <option value="<%=e.id%>"><%= e.portfolioname %></option>
-        <% }) %>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="col-form-label mt-4" for="inputDefault">Quantity </label>
-      <input type="number" class="form-control" placeholder="Quantity" id="inputDefault" name="quantity" value="0" min="1" required>
-    </div>
-    <div class="form-group">
-      <label class="col-form-label mt-4" for="inputDefault">Price</label>
-      <input type="text" class="form-control" placeholder="Price" id="inputDefault" name="price" step=".01" min="1" required>
-    </div>
-    <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Transaction Type </label>
-      <select class="form-select" id="exampleSelect1" name="transtype">
-        <option value="Buy">Buy</option>
-        <option value="Sell">Sell</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <br>
-      <button class="btn btn-primary" type="submit">Save</button>
-    </div>
+      <table>
+        <tr>
+          <td class="header-muted"><label for="exampleSelect1">Portfolio </label></td>
+          <td class="header-muted"><select id="exampleSelect1"  name="portfolioid">
+            <% portfolio.forEach(e => { %>
+            <option value="<%=e.id%>"><%= e.portfolioname %></option>
+            <% }) %>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="header-muted"><label for="inputDefault">Quantity </label></td>
+          <td class="header-muted"><input type="number" id="inputDefault" name="quantity" min="1" required></td>
+        </tr>
+        <tr>
+          <td class="header-muted"><label for="inputDefault">Price</label></td>
+          <td class="header-muted"><input type="text" id="inputDefault" name="price" step=".01" min="1" required></td>
+        </tr>
+        <tr>
+          <td class="header-muted"><label for="exampleSelect1">Transaction Type </label></td>
+          <td class="header-muted"><select id="exampleSelect1" name="transtype">
+            <option value="Buy">Buy</option>
+            <option value="Sell">Sell</option>
+          </select></td>
+        </tr>
+        <tr>
+          <td class="header-muted">&nbsp;</td>
+          <td class="header-muted"><button type="submit">Save</button></td>
+        </tr>        
+      </table>
     </form>
+  
+  </div>  
+  <div class="card-quote">           
+    <p class="header-muted">Listing exchange </p>                    
+    <p class="sub-header-muted"><%=quote.exchange_long%> (<%=quote.currency%>)</p>               
+    <hr><br />               
+    <p class="header-muted">Price</p>                    
+    <p class="sub-header-muted"><%=quote.price%></p> 
+    <p class="header-muted">Day high </p>                    
+    <p class="sub-header-muted"><%=quote.day_high%></p>     
+    <p class="header-muted">Day low</p>                    
+    <p class="sub-header-muted"><%=quote.day_low%></p>     
+    <p class="header-muted">Open</p>                    
+    <p class="sub-header-muted"><%=quote.day_open%></p>     
+    <p class="header-muted">52-week high</p>                    
+    <p class="sub-header-muted"><%=quote['52_week_high']%></p>     
+    <p class="header-muted">52-week low</p>                    
+    <p class="sub-header-muted"><%=quote['52_week_low']%></p>     
+    <p class="header-muted">Volume</p>                    
+    <p class="sub-header-muted"><%=quote.volume%></p>     
+    <p class="header-muted">Day change</p>                    
+    <% if(quote.day_change < 0) { %> 
+    <p class="sub-header-muted danger">      
+    <% }else{ %> 
+      <p class="sub-header-muted">
+    <% } %> 
+    <%=quote.day_change%></p>
+    <% let tradeDate = quote.last_trade_time %>   
+    <% let objDate = new Date(tradeDate)%>
+    <% let dispDate = objDate.toLocaleString() %> 
+    <p class="sub-header-muted"><small>Last trade : <%=dispDate%></small></p>
+  </div>
   <% } %> 
-  </div>
-  </div>
+  <!-- end flex container -->
+
 </div>
+
+

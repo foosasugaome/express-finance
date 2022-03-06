@@ -1,78 +1,66 @@
-<div class="container-full">
- <h4><%=message%></h4>   
-<%if(user) {%>
-    <h5>Wecome back, <%=user.firstname%>!</h5>
-<table class="table">    
-    <tbody>      
-      <tr>
-         <%if(n){%>          
-            <td style="width: 60%;">    
-                <%for(let i = 0; i<n.length;i++) {%> 
-                    <%for(let j=0; j < n[i].length || j < 2; j++){%>
-                        <% if(n[i][j].image !=="") { %> 
-                        <div class="container-news">
-                        <img src="<%=n[i][j].image%>" class="news-tiny" />
-                        <div class="news-text">
-                            <small><a href="<%=n[i][j].url%>"  target="_blank"><%=n[i][i].headline%></a></small>
-                            <p class="text-muted"><small><%=n[i][j].summary%></small></p>
-                            <% let unix_timestamp = n[i][i].datetime %> 
-                            <%let dateObj = new Date(unix_timestamp * 1000);%>
-                            <%let formattedDateTime = dateObj.toLocaleString();%>
-                            <p class="blockquote-footer">
-                                <small>Published : <%=formattedDateTime%> Source : <%=n[i][j].source%> <%if(n[i][j].related.length >0) {%>Tags : <%=n[i][j].related%> <%}%></small>
-                              </p>
-                        </div>
-                    </div>    
-                    <%}%>
-                    <%}%>    
-                <%}%>
-            </td>        
-        <%}%>
-        <%if(w){%>
-        <td style="width: 40%;padding-left: 40px;">
-            <div class="card border-secondary mb-3" style="max-width: 20rem;">
-                <div class="card-header"><small>Your watchlist</small></div>
-                <table class="table">
-                <tr><td><small>Symbol</small></td><td  style="text-align:right"><small>Current Price</small></td></tr>
-                <% w.stonks.forEach(e=>{ %> 
-                <tr><td><small><%=e.symbol%></small></td><td style="text-align:right"><small><%=parseFloat(e.quotes.c)%></small></td>
-                </tr>                    
-                <%})%>                               
-              </table>
-        </td>
-        <%}%>        
-      </tr>
+<div><h5>
+    <% if(user){ %>
+        Wecome back,  <%=user.firstname%>!
+    <% }else{ %> 
+        Hello, guest!
+    <% } %> 
+    </h5>
 </div>
-<%}else{%>
+<marquee behavior="scroll" direction="left" class="ticker"> 
+    <%if(user) { %>
+    <% for(let x = 0; x < quotes.length; x++) { %> 
+        <%=quotes[x].ticker%> : <%=quotes[x].price%>(<%=quotes[x].day_change%>) | 
+    <% } %> 
+    <% } %>
+    <%for(let y = 0; y < news.length; y++) {%>
+        <%=news[y].title%>
+    <% } %>
+</marquee>
 
-    <div class="container-full">
-        <legend>News</legend>        
-        <%if(news.length>0){%>
-        <% news.forEach(element => { %>
-        <div class="container-news">
-          <img src="<%=element.image%>" class="news-thumbnail" />
-      
-          <div class="news-text">
-            <p class="badge bg-success"><%=element.category.toUpperCase()%></p>
-            <a href="<%=element.url%>" target="_blank">
-              <h5><%=element.headline%></h5></a>
-            <p><%=element.summary%></p>
-      
-            <% let unix_timestamp = element.datetime %> 
-            <%let dateObj = new Date(unix_timestamp * 1000);%>
-            <%let formattedDateTime = dateObj.toLocaleString();%>
-            <p class="blockquote-footer">
-              <small>Published : <%=formattedDateTime%> Source : <%=element.source%> <%if(element.related.length >0) {%>Tags : <%=element.related%> <%}%></small>
-            </p>
-      
-          </div>
-        </div>
-      
-        <% }) %>
-        <%}%>
-      </div>
-
-<%}%>
-<div class="container-full">
-    <!-- some other stuff goes here-->    
+<div class="flex-container">
+    <!-- start flex container -->        
+    <div class="card-news">
+        <h5>Latest News</h5>        
+        <br>
+        <hr>
+        <br>
+        <table>
+        <%for(let i = 0; i < news.length; i++) {%>
+        <tr>
+            <td><img src="<%=news[i].image_url%>" alt="" class="thumbnail"></td>
+            <td><p class="sub-header"><a href="<%=news[i].url%>" target="_blank"><%=news[i].title%></a></p>
+                <p class="sub-header-muted"><%=news[i].description%></p>
+                <% let newsDate = news[i].published_at %> 
+                <% let dateObj = new Date(newsDate) %> 
+                <% formattedDate = dateObj.toLocaleString() %> 
+                <p class="sub-header-muted"><small>Published : <%=formattedDate%> | Source : <%=news[i].source%> </small></p></td>
+        </tr>
+        <% } %>
+        </table>        
+    </div>
+        
+    <%if(user) {%>
+        <div class="card-quote">
+            <h5>Your watchlist</h5>
+            <br>
+            <hr>
+            <br>
+            <table style="width: 100%">            
+            <% for(let j = 0; j< quotes.length;j++){ %> 
+                <tr>
+                    <td class="sub-header-muted"><a href="/company/<%=quotes[j].ticker%>"><%=quotes[j].ticker%></a></td>
+                    <td class="align-right sub-header-muted"><%=quotes[j].price%></td>
+                    <% if(quotes[j].day_change < 0) {%> 
+                        <td class="align-right sub-header-muted danger">
+                    <% } else { %> 
+                        <td class="align-right sub-header-muted success">
+                    <% } %> 
+                    <%=quotes[j].day_change%></td>
+                </tr>
+            <%}%>
+        </table>
+    </div>    
+    <% } %> 
+   
+    <!-- end flex container -->
 </div>
