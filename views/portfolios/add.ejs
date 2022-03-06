@@ -1,11 +1,17 @@
-<div>
-    <legend>Portfolio</legend>
-    <p><%=message%></p>
-    <div>
+<div class="flex-container">
+<div class="card-quote">
+  <h4>Portfolio</h4>
+  <h5><%=message%></h5>
+  <br>
+  <hr>
+  <br>    
+    <p>
         <form action="/portfolio/add" method="POST">        
             <input type="text" placeholder="Portolio name" name="portfolio">
             <button type="submit">Add</button>
           </form>
-    </div>
-  </div>
+    </p>
+</div>  
+</div>
+
   

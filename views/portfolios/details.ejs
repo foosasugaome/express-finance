@@ -6,7 +6,7 @@
     <br>
     <hr>
     <br>
-    
+  <% if(portfolio.stonks.length > 0) {%> 
   <table style="width:100%;">
     <thead>
       <tr>
@@ -88,6 +88,9 @@
       </tr>
     </tbody>
   </table>
+  <% } else { %>
+    <h5>You have an empty portfolio.</h5>
+  <%}%>
 </div>
   <!-- end of flex container -->
 </div>

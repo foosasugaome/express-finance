@@ -106,9 +106,8 @@ router.get('/details/:id', async (req,res)=>{
         const arrayPortfolio = [] 
         for(let i =0; i< objPortfolio.portfoliodetails.length; i++){
             let myObj = {}
-            let querySymbol = objPortfolio.portfoliodetails[i].dataValues.symbol
-            // let endPoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${querySymbol}&apikey=${process.env.ALPHAVANTAGE_API_KEY}`
-            let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.SANDBOX_API_TOKEN}`
+            let querySymbol = objPortfolio.portfoliodetails[i].dataValues.symbol            
+            let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.API_TOKEN}`
             const apiFetch = await axios.get(endPoint)            
             myObj.symbol=objPortfolio.portfoliodetails[i].dataValues.symbol
             myObj.stonkName=objPortfolio.portfoliodetails[i].dataValues.stockname                  

@@ -14,31 +14,24 @@ router.get('/', async (req,res)=> {
             const foundWatchList = await db.watchlist.findAll({
                 where: {userId: res.locals.user.id}                                      
             })     
-            
-            // const stonk = {}
-            // stonk.watchlist = 'Watchlist'
-            // const arrayWatchlist = [] 
             let strSymbol = ""
-            for(let i =0; i<foundWatchList.length; i++) {
-                // myObj = {}                
-                // querySymbol = foundWatchList[i].symbol
-                // let endPoint = `https://finnhub.io/api/v1/quote?symbol=${querySymbol}&token=${process.env.API_TOKEN}`
-                // const apiFetch = await axios.get(endPoint)            
-                // myObj.symbol = foundWatchList[i].symbol
-                // myObj.name = foundWatchList[i].stockname
-                // myObj.quotes=apiFetch.data
-                // arrayWatchlist.push(myObj)     
+            for(let i =0; i<foundWatchList.length; i++) {                
                 strSymbol += `${foundWatchList[i].symbol},` 
             }                 
-            let endPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbol}&api_token=${process.env.STOCKDATA_TOKEN}`     
-            // stonk.stonks= arrayWatchlist                 
-            // console.log(stonk.stonks)
-            const resQuotes = await axios.get(endPoint)
-            const stonk = resQuotes.data.data
+            let stonk = null
+            if(strSymbol == "") {
+                servMsg = `You have nothing in your watchlist.`
+            } else {
+                let endPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbol}&api_token=${process.env.STOCKDATA_TOKEN}`                 
+                const resQuotes = await axios.get(endPoint)
+                stonk = resQuotes.data.data
+            }
+            
             // console.log(stonk)
             res.render('watchlist/index.ejs', {message: servMsg, watchlist : stonk})                        
         } catch(err) {                        
-            res.render('watchlist/index.ejs',{message: err, watchlist: null})           
+            console.log(err)
+            res.render('watchlist/index.ejs',{message: `Sorry something went wrong. Please contact your administrator.`, watchlist: null})           
         }                
     } else {
         res.render('watchlist/index.ejs',{message: `You need to login to view your watchlist.`, watchlist: null})
