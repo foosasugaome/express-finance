@@ -45,21 +45,6 @@
         <% let dispDate = objDate.toLocaleString() %> 
         <p class="sub-header-muted"><small>Last trade : <%=dispDate%></small></p>
     </div>
-    
-    <div class="card-news">
-        <h4>Latest News for <%=quote[0].ticker%></h4>        
-        <br>
-        <hr>
-        <br>
-        <%for(let i = 0; i < news.length; i++) {%>
-            <p class="sub-header"><a href="<%=news[i].url%>" target="_blank"><%=news[i].title%></a></p>
-            <p class="sub-header-muted"><%=news[i].description%></p>
-            <% let newsDate = news[i].published_at %> 
-            <% let dateObj = new Date(newsDate) %> 
-            <% formattedDate = dateObj.toLocaleString() %> 
-            <p class="sub-header-muted"><small>Source : <%=news[i].source%> Published : <%=formattedDate%></small></p>            
-        <% } %>         
-    </div>
 
     <div class="card-profile">
         <h4><%=quote[0].name%> </h4>
@@ -81,6 +66,23 @@
             <p class="header-muted">About</p>                    
             <p class="sub-header-muted"><%=profile[0].description%></p>
     </div>
+    
+    <div class="card-news">
+        <h4>Latest News for <%=quote[0].ticker%></h4>        
+        <br>
+        <hr>
+        <br>
+        <%for(let i = 0; i < news.length; i++) {%>
+            <p class="sub-header"><a href="<%=news[i].url%>" target="_blank"><%=news[i].title%></a></p>
+            <p class="sub-header-muted"><%=news[i].description%></p>
+            <% let newsDate = news[i].published_at %> 
+            <% let dateObj = new Date(newsDate) %> 
+            <% formattedDate = dateObj.toLocaleString() %> 
+            <p class="sub-header-muted"><small>Source : <%=news[i].source%> Published : <%=formattedDate%></small></p>            
+        <% } %>         
+    </div>
+
+    
     <%} else {%>  
     <div class="card-profile">
         <h4><%=message%></h4>
