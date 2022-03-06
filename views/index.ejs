@@ -10,11 +10,18 @@
     <%if(user) { %>
     <% for(let x = 0; x < quotes.length; x++) { %> 
         <%=quotes[x].ticker%> : <%=quotes[x].price%>(<%=quotes[x].day_change%>) | 
-    <% } %> 
+    <% } %>     
     <% } %>
+    <%if(crypto) {%>
+        <% for(let p = 0; p< crypto.length;p++){ %> 
+            <%=crypto[p][0].symbol%> : <%=crypto[p][0].price%> (<%=crypto[p][0].change_percent%>) | 
+        <%}%>
+    <%}%>
+    <%if(news){%>
     <%for(let y = 0; y < news.length; y++) {%>
         <%=news[y].title%>
     <% } %>
+    <%}%>
 </marquee>
 
 <div class="flex-container">
@@ -37,8 +44,8 @@
         </tr>
         <% } %>
         </table>        
-    </div>
-        
+    </div>    
+
     <%if(user) {%>
         <div class="card-quote">
             <h5><%=cardHeader%></h5>
@@ -49,18 +56,40 @@
             <% for(let j = 0; j< quotes.length;j++){ %> 
                 <tr>
                     <td class="sub-header-muted"><a href="/company/<%=quotes[j].ticker%>"><%=quotes[j].ticker%></a></td>
-                    <td class="align-right sub-header-muted"><%=quotes[j].price%></td>
+                    <td class="align-right sub-header-muted"><%=quotes[j].price.toFixed(2)%></td>
                     <% if(quotes[j].day_change < 0) {%> 
                         <td class="align-right sub-header-muted danger">
                     <% } else { %> 
                         <td class="align-right sub-header-muted success">
                     <% } %> 
-                    <%=quotes[j].day_change%></td>
+                    <%=quotes[j].day_change.toFixed(2)%></td>
                 </tr>
             <%}%>
         </table>
     </div>    
     <% } %> 
    
+    <%if(crypto) {%>
+        <div class="card-quote">
+            <h5>Crypto </h5>
+            <br>
+            <hr>
+            <br>
+            <table style="width: 100%">            
+            <% for(let p = 0; p< crypto.length;p++){ %> 
+                <tr>
+                    <td class="sub-header-muted"><%=crypto[p][0].symbol%></a></td>
+                    <td class="align-right sub-header-muted"><%=crypto[p][0].price.toFixed(2)%></td>
+                    <% if(crypto[p][0].change_percent < 0) {%> 
+                        <td class="align-right sub-header-muted danger">
+                    <% } else { %> 
+                        <td class="align-right sub-header-muted success">
+                    <% } %> 
+                    <%=crypto[p][0].change_percent.toFixed(2)%></td>
+                </tr>
+            <%}%>
+        </table>
+    </div>    
+    <% } %>     
     <!-- end flex container -->
 </div>
