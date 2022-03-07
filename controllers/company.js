@@ -36,8 +36,7 @@ router.get('/:id', async (req,res) => {
 
         // let's chart!
         let todayDate = new Date()
-        let varDate = new Date(todayDate)
-        console.log(todayDate)
+        let varDate = new Date(todayDate)        
         if(todayDate.getDay() == 0) {
             varDate.setDate(varDate.getDate() - 3) 
             todayDate = varDate
