@@ -90,7 +90,7 @@ Table definitions :
 | POST | /portofolio/:id/usertransactions | Add stocks to portfolio `(modified)`|
 | POST | /watchlist/:id | add stock to watchlist |
 | GET | /company/id | display company profile |
-| DELETE | /portofolio/:id | remove stock from portfolio (Removed. Stocks can only be sold. Will use `/portofolio/:id`) |
+| DELETE | /portofolio/:id | remove stock from portfolio (Changed. Deletes portfolio) |
 | DELETE | /watchlist/:id | remove stock from watchlist |
 | GET | /logout | logout |
 
@@ -186,16 +186,17 @@ User's dashboard
 4. Show performance of stocks in the portfolio.
 
 ## Stretch goals
-1. Show real-time stock prices in company profile page.
+1. Show real-time stock prices in company profile page. (Done)
 2. Add a crypto portfolio.
 
 ## Progress
 1. User can now register and login. User can logout and clear session.
 2. User can create portfolios.
-3. User can search stocks and add to portfolio..
+3. User can search stocks and add to portfolio.
 4. News are published when clicking thet NEWS link in the navigation
 5. Performance of each stock can be viewed in portfolio.
 6. Watchlist contains current prices of stocks.
+7. User can edit account details.
 
 ## Changes
 1. Renamed table/model `portfoliocontent` to `portfoliodetail`
@@ -216,6 +217,10 @@ User's dashboard
 | POST | /portfolio/add_stock/?symbol | Adds stocks to portfolio |
 | GET | /news | Renders news.ejs. Displays finance news |
 | GET | /watchlist/addstock?symbol | Adds stock to watchlist. Page redirected to `/watchlist`. This is the page view of watchlist. |
+| GET | /user | Opens account information with form to edit details. |
+| PUT | /user | Updates account information. |
+| DELETE | /portofolio/:id | remove stock from portfolio (Changed. Deletes portfolio) |
+| POST | /portofolio/:id/usertransactions | Add stocks to portfolio `(modified)`|
 
 
 ## TO DO
@@ -223,7 +228,7 @@ User's dashboard
 - [x] List stocks of a selected portfolio.
 - [x] List stock of watchlist.
 - [x] Display portfolio performance. 
-- [ ] Create company profile page. Shows news, stock quotes.
+- [x] Create company profile page. Shows news, stock quotes.
 
 
 
