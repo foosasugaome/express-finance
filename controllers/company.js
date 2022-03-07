@@ -66,8 +66,12 @@ router.get('/:id', async (req,res) => {
         }
         let today = new Date()        
         // end chart
-
-        res.render('company/index.ejs',{message: null, quote: quote, profile: profile, news: news, isWatchList: isInWatchList,jsonPrice: data, label: label, symbol: symbol, tradingDay: fromDate})
+        let servMsg = null
+        if(quote.length ==0){
+            quote = null
+            servMsg = `Something went wrong. Please try again later.`
+        }
+        res.render('company/index.ejs',{message: servMsg, quote: quote, profile: profile, news: news, isWatchList: isInWatchList,jsonPrice: data, label: label, symbol: symbol, tradingDay: fromDate})
 
     } catch(err) {
         console.log(err)
