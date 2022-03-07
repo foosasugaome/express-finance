@@ -14,6 +14,9 @@ router.get('/', async (req, res) => {
       const foundPortfolio = await db.portfolio.findAll({
         where: { userId: res.locals.user.id }
       })
+      if(foundPortfolio.length==0) {
+        servMsg = `You  have not created any portfolio.`
+      }
       res.render('portfolios/portfolio.ejs', {
         message: servMsg,
         portfolio: foundPortfolio
@@ -46,12 +49,17 @@ router.get('/to', async (req, res) => {
       const endPoint = `https://api.stockdata.org/v1/data/quote?symbols=${stockSymbol}&api_token=${process.env.STOCKDATA_TOKEN}`
       const resQuote = await axios.get(endPoint)
       const quote = resQuote.data.data[0]
-      res.render('portfolios/addstock.ejs', {
-        message: null,
-        symbol: [stockSymbol, stockName],
-        portfolio: listPortfolio,
-        quote: quote
-      })
+      if(listPortfolio.length > 0) {
+        res.render('portfolios/addstock.ejs', {
+          message: null,
+          symbol: [stockSymbol, stockName],
+          portfolio: listPortfolio,
+          quote: quote
+        })
+      } else {
+        res.redirect('/portfolio')        
+      }
+      
     } catch (err) {
       console.log(err)
       res.render('portfolios/addstock.ejs', {
