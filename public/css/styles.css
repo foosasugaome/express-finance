@@ -75,6 +75,7 @@ a:hover {
   height: 100%;
   padding: 5px;
   gap: 5px;
+  justify-content: center;
 }
 .flex-navigation {
   display: flex;   
