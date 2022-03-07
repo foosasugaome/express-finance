@@ -41,6 +41,11 @@ app.use('/watchlist', require('./controllers/watchlist'))
 app.use('/news', require('./controllers/news'))
 app.use('/lookup', require('./controllers/lookup'))
 app.use('/company',require('./controllers/company'))
+app.use('/chart',require('./controllers/chart'))
+app.use('/user', require('./controllers/user'))
+
+
+
 
 app.get('/', async (req,res)=>{
     if(res.locals.user){
@@ -54,7 +59,7 @@ app.get('/', async (req,res)=>{
             }
             let cardHeader = 'Your watchlist'
             if(strSymbols == "") {
-                strSymbols = 'AMZN,MSFT,TSLA,GOOG,V'
+                strSymbols = 'AMZN,MSFT,TSLA,GOOG,FB'
                 cardHeader = 'Tech Stocks'
             }
             let quotesEndPoint = `https://api.stockdata.org/v1/data/quote?symbols=${strSymbols}&api_token=${process.env.STOCKDATA_TOKEN}`

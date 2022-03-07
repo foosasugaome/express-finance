@@ -1,0 +1,42 @@
+<div class="flex-container">
+    <div class="card">
+    <h4>Account Information</h4>
+    <h5 class="danger"><%=message%></h5>
+    <br>
+    <hr>    
+    <br>
+    <%if(userDetails){%>
+      <form action="/user/?_method=PUT" method="POST">
+    <table>
+        <tr>
+            <td class="header-muted"><label for="inputEmail">Email address</label></td>
+            <td class="header-muted"><input type="email" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email" value="<%=userDetails.email%>"/><br />
+            </td>
+          </tr>
+          <tr>
+            <td class="header-muted"><label for="inputPassword">Password</label></td>
+            <td class="header-muted"><input type="password" id="inputPassword" placeholder="Password" value="<%=userDetails.password%>" name="password" /></td>
+          </tr>
+          <tr>
+            <td class="header-muted"><label for="inputUsername">User name</label>
+             </td>
+            <td class="header-muted"> <input type="text" maxlength="25" id="inputUsername" placeholder="User Name" value="<%=userDetails.username%>" name="username" required /></td>
+          </tr>    
+          <tr>
+            <td class="header-muted"><label for="inputFirstName">First Name</label></td>
+            <td class="header-muted"><input id="inputFirstName" placeholder="First Name" name="firstname"  value="<%=userDetails.firstname%>" /></td>
+          </tr>    
+          <tr>
+            <td class="header-muted"><label for="inputLastName">Last Name</label></td>
+            <td class="header-muted"><input type="text" maxlength="25" id="inputLastName" placeholder="Last Name" name="lastname"  value="<%=userDetails.lastname%>" /></td>
+          </tr>    
+          <tr>
+            <td class="header-muted"></td>
+            <td class="header-muted"><button type="submit">Update</button></td>
+          </tr>    
+        </table>
+    </form>
+    <%}%>
+    </div>
+  </div>
+  

@@ -13,6 +13,8 @@ router.get('/',(req,res)=> {
     }    
 })
 
+
+
 router.post('/', async (req, res)=>{
     const user = await db.user.findOne({where: {username: req.body.username}})
     if(!user) { // didn't find user in the database

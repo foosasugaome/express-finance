@@ -6,12 +6,23 @@
     <hr>
     <br>
     <%if(portfolio) {%>
-      <% portfolio.forEach(e => { %>
-        <p class="sub-header">
-          <a href="/portfolio/details/<%=e.id%>"><%= e.portfolioname %> </a>
-        </p>
-        <br>
+      <table>
+      <% portfolio.forEach(e => { %>      
+        <tr>
+          <td>
+            <a href="/portfolio/details/<%=e.id%>"><%= e.portfolioname %> </a>
+          </td>
+          <td>
+            <form action="/portfolio/<%=e.id%>?_method=DELETE" method="POST">
+              <button class="btn-link" >Delete </button>
+            </form>            
+          </td>
+        </tr>
       <%})%>     
+    </table>
+      <br>
+      <br>
+    
       <p class="sub-header"><a href="/portfolio/add">➕ Portfolio</a></p>
       <%}%>
   </div>
