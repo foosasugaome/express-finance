@@ -22,6 +22,19 @@ Additional node packages are also needed :
 
 Run `npm install` to install all dependencies
 
+You will need the following keys in the .env file.
+* PORT - describes the port you are using
+* SECRET_KEY - for encrypting userid
+* API_TOKEN - https://finnhub.io/ API token key. the token can be obtained for free at finnhub.com
+* SANDBOX_API_TOKEN - sandbox API token key for testing endpoints. also from finnhub.io
+* ALPHAVANTAGE_API_KEY - API token from https://www.alphavantage.co/. This is used for searching stocks.
+* STOCKDATA_TOKEN - API token from https://www.stockdata.org/
+
+Database/Models
+* The application is using PostgreSQL. Postgresql should be installed. Once installed, create a new database named `express_finance`
+* Run the sequelize scripts in `createModel.txt` to create models.
+
+
 A free API key must be obtained from finnhub.io. This API key will be stored in the .env file. (Read `Changes` section at the bottom of the page.) 
 
 ## ERD
@@ -206,6 +219,7 @@ User's dashboard
 5. Renamed column `stockcount` to `quantity` in `portfoliodetail` table/model.
 6. Changed datatype of `price` in `usertransaction` table/model from `integer` to `decimal(10,2)`
 7. Stocks will not be removed from porfolio. Instead, it will be closed after selling all.
+8. Majority of the API endpoints are from stockdata.org. 
 
 ## RESTful routes changes/additions
 
