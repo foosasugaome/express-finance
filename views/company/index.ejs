@@ -1,9 +1,18 @@
 <div class="flex-container">    
-    <%if(quote) {%>          
-    <div class="card">                    
+    <%if(quote) {%>
+    <% let tradeDate = quote[0].last_trade_time %>   
+    <% let objDate = new Date(tradeDate)%>
+    <% let dispDate = objDate.toLocaleString() %> 
+    <div class="flex-container">        
+    <div class="card-chart">                    
         <h2><%=quote[0].ticker%></h2>
         <h4><%=quote[0].name%> </h4>
         <br>
+           <canvas id="myChart" width="400" height="200"></canvas>
+        <p class="sub-header-muted"><small>Last trade : <%=dispDate%> EST</small></p>
+           <br>
+        
+        
         <h4>Real Time Data</h4>
         <p class="header-muted">Listing exchange </p>                    
         <p class="sub-header-muted"><%=quote[0].exchange_long%> (<%=quote[0].currency%>)</p>               
@@ -41,10 +50,6 @@
             <p class="sub-header-muted">
         <% } %> 
         <%=quote[0].day_change%></p>
-        <% let tradeDate = quote[0].last_trade_time %>   
-        <% let objDate = new Date(tradeDate)%>
-        <% let dispDate = objDate.toLocaleString() %> 
-        <p class="sub-header-muted"><small>Last trade : <%=dispDate%></small></p>
     </div>
 
     <div class="card">
@@ -93,4 +98,29 @@
     </div>   
     <%}%>
 </div>
-
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+  
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <%- JSON.stringify(label) %>,
+            datasets: [{
+                label: <%- JSON.stringify(symbol) %>,
+                data: <%- JSON.stringify(jsonPrice) %>,
+                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)'],
+                borderWidth: 1,
+                tension: 0.1
+            }]
+        },
+        options: {
+            animation: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+  </script>

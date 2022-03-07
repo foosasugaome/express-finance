@@ -41,7 +41,6 @@ app.use('/watchlist', require('./controllers/watchlist'))
 app.use('/news', require('./controllers/news'))
 app.use('/lookup', require('./controllers/lookup'))
 app.use('/company',require('./controllers/company'))
-app.use('/chart',require('./controllers/chart'))
 app.use('/user', require('./controllers/user'))
 
 
