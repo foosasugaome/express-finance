@@ -90,6 +90,9 @@ app.get('/logout', (req,res)=>{
     res.clearCookie('userId')
     res.redirect('/')    
 })
+app.get('*', (req,res) => {
+    res.render('404.ejs')
+})
 
 app.listen(PORT, err=> {
     if(err) console.log(err)
