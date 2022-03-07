@@ -38,4 +38,5 @@ router.post('/', async(req, res)=> {
         res.render('users/register.ejs', {message: err})
     }
 })
+
 module.exports = router
