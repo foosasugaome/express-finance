@@ -230,6 +230,9 @@ User's dashboard
 - [x] Display portfolio performance. 
 - [x] Create company profile page. Shows news, stock quotes.
 
+## Extras
+1. Added Intra-day chart
+
 
 
 
