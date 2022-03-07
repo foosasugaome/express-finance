@@ -76,7 +76,8 @@ app.get('/', async (req,res)=>{
             res.render('index.ejs', {message: null, news: news, quotes: quotes, cardHeader: cardHeader, crypto: resCrypto.data.data})
         }catch (err) {
             console.log(err)
-            res.render('index.ejs', {message: `An error has occured. Please contact your administrator.`, news: null, quotes: null, crypto:null})
+            res.status(400).render('main/404')
+            // res.render('index.ejs', {message: `An error has occured. Please contact your administrator.`, news: null, quotes: null, crypto:null})
         }
     }else{        
         let endpoint = `https://api.stockdata.org/v1/news/all?symbols=TSLA%2CAMZN%2CMSFT&filter_entities=true&language=en&api_token=${process.env.STOCKDATA_TOKEN}`
@@ -88,6 +89,9 @@ app.get('/', async (req,res)=>{
 app.get('/logout', (req,res)=>{
     res.clearCookie('userId')
     res.redirect('/')    
+})
+app.get('*', (req,res) => {
+    res.render('404.ejs')
 })
 
 app.listen(PORT, err=> {
