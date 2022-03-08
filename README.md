@@ -4,6 +4,11 @@ This is my 2nd project for SEI bootcamp at General Assembly
 ## About the application
 Web application for portfolio, tracking stocks, markets, and financial news. Real-Time stock, currencies and crypto information using Finnhub Stock API. The free API allows for access to several features like company news, basic financials, company earnings, crypto exchanges and symbols etc. Visit http://finnhub.io for more information.
 
+## Link to application
+
+https://expressfinance.herokuapp.com/
+
+
 ## Features
 *  Users can login and create a portfolio containing a list of stocks they own and view a snapshot of how their portfolio is  perfmorming.
 *  Users can create a watchlist of stocks they are interested in.

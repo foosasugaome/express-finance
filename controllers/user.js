@@ -13,7 +13,7 @@ router.get('/', async(req,res) =>{
             const foundUser = await db.user.findOne({
                 where: {id: res.locals.user.id}
             })            
-            console.log(foundUser.dataValues)
+            // console.log(foundUser.dataValues)
             res.render('users/details.ejs',{message: null, userDetails: foundUser.dataValues})    
         } catch(err) {
             console.log(err)
@@ -42,7 +42,7 @@ router.put('/', async(req, res) => {
             status : 'Active'            
         })
         await foundUser.save()
-        console.log(foundUser)
+        // console.log(foundUser)
         }        
         res.render('users/details.ejs',{message: `Account updated.`, userDetails: foundUser.dataValues})    
     } catch(err) {
