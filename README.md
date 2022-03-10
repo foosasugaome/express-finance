@@ -1,5 +1,5 @@
 # Express Finance
-This is my 2nd project for SEI bootcamp at General Assembly
+A simple stocks portfolio performance tracker.
 
 ## About the application
 Web application for portfolio, tracking stocks, markets, and financial news. Real-Time stock, currencies and crypto information using Finnhub Stock API. The free API allows for access to several features like company news, basic financials, company earnings, crypto exchanges and symbols etc. Visit http://finnhub.io for more information.

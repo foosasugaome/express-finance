@@ -49,9 +49,8 @@ router.get('/:id', async (req,res) => {
         let fromDate = todayDate.toISOString().slice(0, 10)        
         
         const resp = await axios.get(
-          `https://api.stockdata.org/v1/data/intraday?symbols=${symbol}&sort=asc&extended_hours=false&interval=hour&api_token=${process.env.STOCKDATA_TOKEN}`
-        )    
-        
+          `https://api.stockdata.org/v1/data/intraday?symbols=${symbol}&sort=asc&date_from=${fromDate}&api_token=${process.env.STOCKDATA_TOKEN}`
+        )            
         const priceData = resp.data.data
         let data = []
         let label = []
