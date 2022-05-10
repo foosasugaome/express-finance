@@ -22,7 +22,7 @@ router.post('/', async (req, res)=>{
         res.render('users/login.ejs', {message: 'Invalid email/password'})
     } else if(!bcrypt.compareSync(req.body.password, user.password)) { // found user but password was wrong 
         console.log('Incorrect Password')
-        res.render('users/login.ejs', {error: 'Invalid email/password'})
+        res.render('users/login.ejs', {message: 'Invalid email/password'})
     } else {
 
         console.log('logging in the user!')
